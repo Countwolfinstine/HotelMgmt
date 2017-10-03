@@ -1,0 +1,57 @@
+<!DOCTYPE html>	
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles2.css">
+  <title>EA</title>
+</head>
+
+<body>
+<div class="container">
+<h1>UPLOAD FILES HERE</h1>
+	
+</div>
+	<div class="container frmdiv" id=>
+		<form>
+			<div class="frmnm">
+				<label for="courseName" class="frmtxt">Course Name</label>
+				<input type="text" id="courseName" name="" class="form-control" placeholder="courseName">
+			</div>
+			<div class="frmnm">
+				<label for="courseId" class="frmtxt">Course Id</label>
+				<input type="text" id="courseId" name="" class="form-control" placeholder="courseName">
+			</div>
+			<div class="frmnm">
+				<label for="teacher" class="frmtxt">Teacher</label>
+				<input type="text" id="teacher" name="" class="form-control" placeholder="courseName">
+			</div>
+			<div class="frmnm">
+
+				<label for="upload" class="frmtxt">Upload</label>
+				<input type="file" id="upload" name="" class="form-control" placeholder="courseName">
+			</div>
+		</form>
+	</div>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+<script >
+	$(".frmnm").mouseover(function() {
+	$(this).css("background-color", "#1c464f");
+	$(this).css("color", "#eee");
+});
+$(".frmnm").mouseout(function() {
+	$(this).css("background-color", "#eee");
+	$(this).css("color", "rgb(255,255,255)");
+});
+
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:700|Raleway:300');
+html{
+	height:100%;
+}
+
+body{
+	font-family: 'Raleway';
+	font-weight:300;
+	height: 100%;
+	background-color:#eee;
+}
+#upload {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.frmnm{
+	background: rgba(0,0,0,0);	
+	padding-bottom: 10px;
+	padding-top: 10px;	
+	padding-left : 10px;
+	padding-right: 10px;
+	
+	position: relative;
+
+}
+
+.frmtxt{
+	color:black;
+	font-size: 20px;
+}
+
+.frmdiv{
+padding-top: 200px;
+}
+h1 {
+    letter-spacing: 7px;
+    font-family: 'Rajdhani', Arial;
+}
+
+.center{
+	text-align:center;
+}
+
+
+@media screen and (max-width: 480px) {
+    .option-wrapper {
+        margin-top:10%;
+    }
+}
+

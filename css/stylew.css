@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:700|Raleway:300');
+html{
+	height:100%;
+}
+.aa{
+	font-size: 20px;
+	padding-top: 15px;
+	position: relative;
+}
+.form-control{
+	font-size: 20px;
+	padding: 15px;
+}
+/*body{
+	font-family: 'Rajdhani';
+	font-weight:300;
+	height: 100%;
+}*/
+.box{
+	/*background-color:#392b47;
+*/	padding:100px;
+	margin: 100px;
+/*	box-shadow:
+*/	font-family: 'Rajdhani';
+	/*color: white;
+	*/font-weight:300;
+
+}

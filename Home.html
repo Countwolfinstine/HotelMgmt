@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles3.css">
+  <title>Home</title>
+</head>
+<body>
+	
+<div class="jumbotron Jumbo1" >
+	<div class="container">
+
+		<h1 class="center heading" >BOOK A TABLE</h1>
+		<span id="Hm_ser" class="ser"> SEARCH </span>
+	</div>
+</div>
+
+<div class="jumbotron Jumbo2">
+	<div class="container">
+
+		<h1 class="center heading" >WHATS COOKIN'</h1>
+		<span id="Hm_upl" class="ser">MENU</span>
+	</div>
+</div>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js"></script>
+<script >
+	$("#Hm_ser").mouseover(function () {
+		$(this).css({"background-color":"white","color":"#c45611"})
+	});
+	$("#Hm_ser").mouseout(function () {
+		$(this).css({"background-color":"#c45611","color":"white"})
+	});
+	$("#Hm_upl").mouseout(function () {
+		$(this).css({"background-color":"white","color":"#c45611"})
+	});
+	$("#Hm_upl").mouseover(function () {
+		$(this).css({"background-color":"#c45611","color":"white"})
+	});
+	$("#Hm_ser").click(function () {
+		(window).open(".//EA.html");
+	});
+$("#Hm_upl").click(function () {
+		(window).open(".//EA.html");
+	});
+
+</script>
+
+</body>
+</html>
