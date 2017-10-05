@@ -7,7 +7,7 @@ from operator import itemgetter
 hostname = 'localhost'
 username = 'root'
 password = ''
-database = 'moder'
+database = 'hotelmgmt'
 rows=[]
 
 def doQuery( conn, hesaru ) :
