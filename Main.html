@@ -10,6 +10,22 @@
 </head>
 <body>
 
+<div id = "holder">
+		
+	</div>
+	<div id = "d2">
+		<ul id = "nav">
+			<li id="nav1"><a class="bmenu" href=""><b>LOCATION</a></li>
+			<li id="nav2"><a class="bmenu" href="login.html">LOGIN</a></li>
+			<li id="nav3"><a class="bmenu" href="signup.html">SIGNUP</a></li>
+			<li id="nav4"><a class="bmenu" href="">MENU</a></b></li>
+		</ul>
+</div>
+<div id="d3">
+	<a id = "adow" class="explnk" href="#abtsec">EXPLORE<br/></a>
+	<a id = "adow" class="explnk" href="#abtsec"><img class = "arbut" src="images/Arrow-Down_in.png" width="50px" height="50px"></a>	
+</div>
+
 <div class="jumbotron" id="Jumbo1">
 	<div class="container">
 		<div class = "center container">
@@ -42,7 +58,7 @@
 		<h2 class="center caps"><b> The Moderation</b></h2>
 		<center><img  class="abimg" src="images/abs5.png"/></center>
 		<div class="container abcont" >
-			<p>The platfrom has extensive tools to visualize and moderate the students data according to specific requirenments. The platform enables the user to make specific changes to the data set and see the changes in the form of updated visualizations in real-time. The changes made to the data can be saved while retainig the original data</p>
+			<a id="abtsec" class="abtlnk" href=""><p>The platfrom has extensive tools to visualize and moderate the students data according to specific requirenments. The platform enables the user to make specific changes to the data set and see the changes in the form of updated visualizations in real-time. The changes made to the data can be saved while retainig the original data</p></a>
 		</div>		
 
 	</div>
@@ -206,6 +222,20 @@
   	$("#Jumbo5").show();
   	
 });
+
+	$('a[href^="#"]').on('click', function(event) 
+		{
+
+	    var target = $(this.getAttribute('href'));
+
+	    if( target.length ) {
+	        event.preventDefault();
+	        $('html, body').stop().animate({
+	            scrollTop: target.offset().top
+	        }, 1000);
+	    }
+
+	});
 </script>
 
 </body>

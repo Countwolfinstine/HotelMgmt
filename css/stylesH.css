@@ -24,7 +24,8 @@ body{
 	background-image: url('../images/random.jpg');
 	background-position: center center;
 }
-#Jumbo1{
+#Jumbo1
+{
 	margin-bottom: 0px;
 	height: 80%;
 	background:url(../images/EAbg.jpg);
@@ -118,4 +119,89 @@ body{
 
 .services section {
   text-align: center;
+}
+
+
+#d2
+{
+	position: fixed;
+	top:0px;
+	font-family: Felix Titling;
+	font-size:20px;
+	width: 100%;
+	left: 0px;
+	height: 200px;
+	z-index: 3;
+
+}
+
+#holder
+{
+	position: fixed;
+	top:00px;
+	background-color: #f2f4f7;
+	width: 100%;
+	left: 0px;
+	height: 200px;
+	opacity: 0.2;
+	z-index: 3;
+
+}
+
+#d3
+{	
+	z-index: 3;
+	position: absolute;
+	top: 600px;
+	color: white;
+	left: 900px;
+	font-family: Felix Titling;
+	font-size: 20px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#nav
+{
+	display: inline;
+	position: absolute;	
+	right : 30px;
+	top: 100px;
+}
+
+#nav1,#nav2,#nav3,#nav4,#nav5
+{
+	text-decoration: none;
+	display: inline;
+	padding: 90px;
+
+}
+
+a.bmenu
+{
+	text-decoration: none;
+	color: white;
+	position: absolute;
+	top: 50px;
+	transition: font-size 1s, font-color 1s;
+
+}
+
+a.bmenu:hover
+{
+	color: lightgrey;
+	font-size: 25px;
+
+}
+
+a.abtlnk
+{
+	text-decoration: none;
+	color: black;
+}
+
+a.explnk
+{
+	text-decoration: none;
+	color: white;
 }
