@@ -1,6 +1,20 @@
-#msign
+
+.panel-default 
 {
-	color: ;
-	font-size: ;
-	font-family: ;
+ opacity: 0.9;
+ margin-top:30px;
+}
+
+.form-group.last 
+{
+ margin-bottom:50px;
+}
+
+div.container
+{
+	position: absolute;
+	top: 300px;
+	right: 450px;
+	width: 1900px;
+
 }
