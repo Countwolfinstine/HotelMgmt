@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css"></style>
-	<link rel="stylesheet" type="text/css" href="logstyle.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/signstyle.css">
 	<script type="text/javascript" src="mscript.js"></script>
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
 </head>
-<body>
-<div id = "msign">
-	<label>Pick A Username</label><br>  <input type="text" name="usrbxe"><br><br>
-	<label>Enter Password</label><br>   <input type="password" name="passbxe"><br><br>
-	<label>Retype Password</label><br>  <input type="password" name="passbxv"><br><br>
-	<label>Email id</label><br>   <input type="Email" name="emaile"><br><br>
-	<label>Phone number</label><br>   <input type="number" name="numbx"><br><br>
-	<button name="reg">REGISTER</button>
+<body background="mainback.jpg">
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-7">
+            <div class="panel panel-default">
+                <div class="panel-heading"> <strong class="">Register</strong>
+
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Pick a username</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="inputEmail3" placeholder="Username" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-3 control-label">Enter a Valid Email-ID</label>
+                            <div class="col-sm-9">
+                                <input type="Email" class="form-control" id="inputEmail3" placeholder="name@example.com" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Enter a Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Should contain 6-13 characters and a number" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Re-type your Password</label>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="inputPassword3" placeholder="Re-type the Password" required="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-3 control-label">Enter Phone no.</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="inputPassword3" placeholder="" required="">
+                            </div>
+                        </div>
+
+                        </div>
+                        <div class="form-group last">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <button type="submit" class="btn btn-success btn-sm">Signup!</button>
+                                <button type="reset" class="btn btn-default btn-sm">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        
+            </div>
+        </div>
+    </div>
 </div>
 	
 </body>
