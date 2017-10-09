@@ -27,7 +27,7 @@ public class User {
 				return entry.getValue();
 			}
 		}
-		return new Rating(0, -1);
+		return null;
 	}
 	
 	

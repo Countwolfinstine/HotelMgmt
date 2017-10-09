@@ -10,13 +10,19 @@ public class Dataset {
 		itemArray = new ArrayList<Item>();
 		
 	}
+	public ArrayList<User> getUsers(){
+		return userArray;
+	}
+	public ArrayList<Item> getItems(){
+		return itemArray;
+	}
 	public User getUser(int userId){
 		for(int i=0;i<userArray.size();i++){
 			if(userArray.get(i).getUserId()==userId){
 				return userArray.get(i);
 			}
 		}
-		return new User(-1);
+		return null;
 	}
 	
 	public int getUserCount(){

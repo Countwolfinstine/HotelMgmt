@@ -44,4 +44,35 @@ public class Main {
 			similarityValues[u][u] = 1.0;
 		}	
 	}
+	public double predictRating(User user, Item item) {
+		double estimatedRating = Double.NaN;
+		int itemId = item.getItemId();
+		int userId = user.getUserId();
+		double similaritySum = 0.0;
+		double weightedRatingSum = 0.0;
+		// check if user has already rated this item
+		Rating existingRatingByUser = user.getItemRating(item.getItemId());
+		if (existingRatingByUser != null) {
+		estimatedRating = existingRatingByUser.getRating();
+		} else {
+		for (User anotherUser : dataSet.getUsers()) {
+		Rating itemRating = anotherUser.getItemRating(itemId);
+		// only consider users that rated this book
+		if (itemRating != null) {
+		// should add similarityMatrix or write getValue method here...
+		double similarityBetweenUsers =
+		similarityMatrix.getValue(userId, anotherUser.getUserId());
+		double ratingByNeighbor = itemRating.getRating();
+		double weightedRating =
+		similarityBetweenUsers * ratingByNeighbor;
+		weightedRatingSum += weightedRating;
+		similaritySum += similarityBetweenUsers;
+		}
+		}
+		if(similaritySum > 0.0) {
+			estimatedRating = weightedRatingSum / similaritySum;
+		}
+		}
+		return estimatedRating;
+		}
 }
