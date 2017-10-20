@@ -1,0 +1,29 @@
+
+.panel-default 
+{
+ opacity: 0.9;
+ margin-top:120px;
+}
+
+.form-group.last 
+{
+ margin-bottom:50px;
+}
+
+
+body {
+background-image: url(../images/EAbg.jpg); /*You will specify your image path here.*/
+
+-moz-background-size: cover;
+-webkit-background-size: cover;
+background-size: cover;
+background-position: top center !important;
+background-repeat: no-repeat !important;
+background-attachment: fixed;
+}
+div.container
+{
+	top:50%;
+  	left:50%;
+	
+}
