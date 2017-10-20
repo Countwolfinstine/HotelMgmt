@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles_chiefq.css">
+  <title>chief Queue</title>
+</head>
+<body>
+<div class="jumbotron" id="Jumbo1">
+	<div class="container">
+		<div class = "center container">
+			<h1 class="heading"><b>The chief Queue</b></h2>
+			<h2 id="paddtohell" class="heading"> </h2>
+		</div>
+	</div>
+</div>
+<div class="jumbotron" id="Jumbo2">
+
+</div>	
+<dl></dl>
+</body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+
+    $.getJSON('/queue-api/', printTerms);
+    $('form').submit(function (e) {
+        e.preventDefault();
+        $.post('/dictionary-api', {term: $('#term').val(), defined: $('#defined').val()}, printTerms);
+        this.reset();
+    });
+
+});
+
+function printTerms(terms) {
+    $('#Jumbo2').empty();
+    $.each(terms, function () {
+        var $div = $("<div>", {id: "fooditem", "class": "container fitem"});
+        $('<dt>').text('Order ID : ' + this.term).appendTo($div);
+        $('<dd>').text('Food Item : '+ this.food).appendTo($div);
+        $('<dd>').text(this.defined).appendTo($div);
+        $div.appendTo($('#Jumbo2'));
+    });
+    $('<dt>').off('dblclick').dblclick(function() {
+        $.ajax({
+            url: '/queue-api/' + $(this).text(),
+            type: 'DELETE',
+            success: printTerms
+        });
+    });
+}
+
+$("#fooditem").mouseover(function () {
+		$(this).css({"background-color":"white","color":"#c45611"})
+	});
+$("#fooditem").mouseout(function () {
+		$(this).css({"background-color":"#c45611","color":"white"})
+	});
+</script>
+</html>
