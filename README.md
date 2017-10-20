@@ -7,6 +7,6 @@ Pre-requsite:
 	Chrome or any other browser
 
 Static web server-
-	npm install
-	npm insatll -g httpster
-	httpster -p 3000 -d /HotelMgmt/
+	$npm install
+	$node app.js
+	go to 'localhost:3000' 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>THE WAITER</title>
+	<link rel="images/icon" href="logo.jpg">
+	<link rel="css/stylesheet" href="bootstrap.min.css">
+	<script src="js/jquery-2.1.4.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="css/style.css">
+	<script type = "text/javascript">
+		
+		function AppendDiv()
+		{
+			
+			var d = document.createElement("div");
+			d.id = "item";
+			var f = document.createElement("form");
+			f.name= "waiterform" ;
+			f.action = "";
+			f.method = "POST";
+			f.id = "Order";
+			f.class = "form-inline";
+			var tid = document.createElement("INPUT");
+			tid.setAttribute("placeholder" , "TableId");
+			//tid.size = "12" ;
+			f.appendChild(tid);
+			
+			var oid = document.createElement("INPUT");
+			oid.setAttribute("placeholder" , "OrderId");
+			//oid.readOnly = true ;
+			//oid.size = "12" ;
+			f.appendChild(oid);
+			
+			var ItemName = document.createElement("INPUT");
+			ItemName.setAttribute("placeholder" , "Item");
+			//ItemName.size = "50" ;
+			f.appendChild(ItemName);
+			
+			var qty = document.createElement("INPUT");
+			qty.setAttribute("placeholder" , "Qnty");
+			//qty.size = "15" ;
+			f.appendChild(qty);
+			
+			var sp = document.createElement("INPUT");
+			sp.setAttribute("placeholder" , "Specifics");
+			//sp.size = "15" ;
+			f.appendChild(sp);
+			
+			d.appendChild(f);
+			document.body.appendChild(d);
+						
+		}
+		function done()
+		{
+			
+			var formsCollection = document.getElementsByTagName("form");
+			
+				ip = document.getElementsByTagName("input");
+				var v = 1;
+				for(var i =0;i < ip.length;++i)
+				{
+					if(ip[i].value=='')
+					{
+						
+						v = 0 ;
+						break;
+					}
+				}
+				
+				if(v ==0)
+				{
+					alert("Fill all fields");
+				}
+				else if(v==1)
+				{
+					for(var i =0;i < formsCollection.length;++i)
+					{
+						formsCollection[i].submit();
+					}
+				}
+				
+			}
+</script>
+	
+</head>
+<body onload ="AppendDiv()" >
+		<div id = "holder">
+		</div>
+		
+		<div id = "d2">
+		<ul id = "nav">
+			
+			<li id="nav2"><a class="bmenu" href="login.html">LOGIN</a></li>
+			
+			<li id="nav4"><a class="bmenu" href="">MENU</a></b></li>
+		</ul>
+</div>
+		<div class="jumbotron" id="Jumbo1">
+			<div class="container">
+				<div class = "center container">
+					<h1 class="heading"><b>The Triton Hotel</b></h2>
+					<h2 id="paddtohell" class="heading"> </h2>
+					<div id="ov1" class="container">
+					<h4 class="heading"><b>WAITER NAME</b></h2>
+					</div>
+				
+				</div>
+			</div>
+	</div>
+	
+	<img src = "images/plus.png" onclick="AppendDiv()" id = "pl">
+	<br/><br/>
+	<button id ="btn" onclick = "done()">Submit</button>
+</body>
+</html>
+		

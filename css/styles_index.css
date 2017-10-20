@@ -13,8 +13,7 @@ body{
 .heading {
     letter-spacing: 7px;
     font-family: 'Rajdhani', Arial;
-    font-family: 'Rajdhani', Arial;	
-		text-transform: uppercase;
+	text-transform: uppercase;
 }
 .center{
 	text-align:center;
@@ -80,6 +79,9 @@ body{
 	background-color: rgba(0,0,0,0);
 	border-color: rgba(0,0,0,0);
 
+}
+.navbar-brand {
+	font-size: 20px;
 }
 
 #abcont1{
@@ -168,15 +170,10 @@ body{
 	right : 30px;
 	top: 100px;
 }
-
-#nav1,#nav2,#nav3,#nav4,#nav5
+#navv
 {
-	text-decoration: none;
-	display: inline;
-	padding: 90px;
-
+	background-color:rgba(255,255,255,0.9);
 }
-
 a.bmenu
 {
 	text-decoration: none;
@@ -200,6 +197,11 @@ a.abtlnk
 	color: black;
 }
 
+.nav
+{
+	color: white;
+	font-size: 20px;
+}
 a.explnk
 {
 	text-decoration: none;

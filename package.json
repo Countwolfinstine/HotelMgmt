@@ -2,7 +2,7 @@
   "name": "restaurant-management",
   "version": "1.0.0",
   "description": "A restaurant managenment application",
-  "main": "sam.js",
+  "main": "app.js",
   "dependencies": {
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
