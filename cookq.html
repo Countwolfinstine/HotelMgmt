@@ -38,11 +38,11 @@
 
 function printTerms(terms) {
     $('#Jumbo2').empty();
-    $.each(terms, function () {
+    $.each(terms[0], function () {
         var $div = $("<div>", {id: "fooditem", "class": "container fitem"});
-        $('<dt>').text('Order ID : ' + this.term).appendTo($div);
-        $('<dd>').text('Food Item : '+ this.food).appendTo($div);
-        $('<dd>').text(this.defined).appendTo($div);
+        $('<dt>').text('Order ID : ' + this["s"]).appendTo($div);
+        $('<dd>').text('Food Item : '+ this["f"]).appendTo($div);
+        $('<dd>').text(this["e"]).appendTo($div);
         $div.appendTo($('#Jumbo2'));
     });
     $('<dt>').off('dblclick').dblclick(function() {

@@ -1,6 +1,12 @@
- var express = require("express");
+var express = require("express");
 var cors = require("cors");
-
+var PythonShell = require('python-shell');
+var path = require("path");
+var PythonShell = require('python-shell');
+var options = {
+    mode: 'json',
+   
+};
 var app = express();
 
 var sk = [
@@ -33,7 +39,13 @@ app.use(express.static("./"))
 app.use(cors());
 
 app.get("/queue-api",function(req,res){
-	res.json(sk);
+
+PythonShell.run('/scripts/Samplepython.py', options, function (err, results) {
+    if (err) throw err;
+    console.log(results);
+	res.send(results);
+
+});
 
 });
 
