@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 05, 2017 at 12:47 PM
+-- Generation Time: Oct 26, 2017 at 04:18 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -34,6 +34,14 @@ CREATE TABLE `currentorder` (
   `progress` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `currentorder`
+--
+
+INSERT INTO `currentorder` (`cookid`, `orderid`, `progress`) VALUES
+('3', '2', 1),
+('3', '1', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -49,6 +57,14 @@ CREATE TABLE `feedback` (
   `time` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`feedid`, `userid`, `ratefood`, `rateservice`, `feedback`, `time`) VALUES
+(1, '1', 3, 4, 'good', '2017-10-11'),
+(2, '2', 5, 5, 'excellent', '2017-10-09');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +78,14 @@ CREATE TABLE `fooditems` (
   `ingid` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `fooditems`
+--
+
+INSERT INTO `fooditems` (`fid`, `name`, `cost`, `ingid`) VALUES
+('1', 'dosa', 20, '1'),
+('2', 'idli', 10, '2');
+
 -- --------------------------------------------------------
 
 --
@@ -73,6 +97,15 @@ CREATE TABLE `ingredient` (
   `name` varchar(20) NOT NULL,
   `quantity` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ingredient`
+--
+
+INSERT INTO `ingredient` (`ingid`, `name`, `quantity`) VALUES
+('1', 'onion', 10),
+('2', 'batter', 100),
+('3', 'potato', 50);
 
 -- --------------------------------------------------------
 
@@ -90,6 +123,15 @@ CREATE TABLE `login` (
   `rating` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`userid`, `password`, `phoneno`, `authorization`, `address`, `dob`, `rating`) VALUES
+('1', '1', 1234567890, 'manager', 'xyz', '2017-10-10', 5),
+('2', '1234', 1234567890, 'customer', 'abc', '2017-10-25', 3),
+('3', '1234', 1234567890, 'cook', 'abcd', '2017-10-12', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -103,6 +145,14 @@ CREATE TABLE `orderlog` (
   `waiterid` varchar(20) NOT NULL,
   `fid` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orderlog`
+--
+
+INSERT INTO `orderlog` (`oid`, `tableno`, `time`, `waiterid`, `fid`) VALUES
+('1', 3, '2017-10-25', '2', '1'),
+('2', 3, '2017-10-25', '3', '1');
 
 --
 -- Indexes for dumped tables
@@ -157,7 +207,7 @@ ALTER TABLE `orderlog`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedid` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `feedid` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
