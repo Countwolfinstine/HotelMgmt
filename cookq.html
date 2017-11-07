@@ -30,24 +30,26 @@
     $.getJSON('/queue-api/', printTerms);
     $('form').submit(function (e) {
         e.preventDefault();
-        $.post('/dictionary-api', {term: $('#term').val(), defined: $('#defined').val()}, printTerms);
+        $.post('/queue-api', {term: $('#term').val(), defined: $('#defined').val()}, printTerms);
         this.reset();
     });
 
 });
 
 function printTerms(terms) {
+    console.log('red');
     $('#Jumbo2').empty();
-    $.each(terms[0], function () {
+    $.each(terms, function () {
         var $div = $("<div>", {id: "fooditem", "class": "container fitem"});
-        $('<dt>').text('Order ID : ' + this["s"]).appendTo($div);
-        $('<dd>').text('Food Item : '+ this["f"]).appendTo($div);
+        $('<dt>').text('Order ID :' + this["cookid"]).appendTo($div);
+        $('<dd>').text('Food Item :'+ this["orderid"]).appendTo($div);
         $('<dd>').text(this["e"]).appendTo($div);
         $div.appendTo($('#Jumbo2'));
     });
-    $('<dt>').off('dblclick').dblclick(function() {
+    $('div dt').off('dblclick').dblclick(function() {
+        rs =$(this).text().split(':');
         $.ajax({
-            url: '/queue-api/' + $(this).text(),
+            url: '/queue-api/' + rs[1],
             type: 'DELETE',
             success: printTerms
         });

@@ -8,6 +8,7 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "httpster": "^1.0.3",
+    "mysql": "^2.15.0",
     "python-shell": "^0.4.0"
   },
   "devDependencies": {},
