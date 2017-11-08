@@ -1,0 +1,125 @@
+<html>
+<head></head>
+<title></title>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<body>
+
+<div id="recommender_menu">
+	<p><b>Recommended Items to be prepared:</b></p>
+	<table>
+	  <tr>
+	    <th>Food Name</th>
+	    <th>Time</th>
+	    <th>Ingredient</th>
+	    <th>Quantity</th>
+	  </tr>
+	  <tr>
+	    <td>Dosa</td>
+	    <td>10:30 AM</td>
+	    <td>Batter</td>
+	    <td>100</td>
+	  </tr>
+	  <tr>
+	    <td>Centro comercial Moctezuma</td>
+	    <td>Francisco Chang</td>
+	    <td>Mexico</td>
+	    <td>Mexico</td>
+	  </tr>
+	</table>	
+</div>
+<br><br>
+<div id="inventory">
+	<p><b> Inventory Items with quanities</b></p>
+	<div id="inventory_details">
+		<table>
+		  <tr>
+		    <th>Ingredient</th>
+		    <th>Quantity</th>
+		  </tr>
+		  <tr>
+		    <td>Batter</td>
+		    <td>1000</td>
+		  </tr>
+		  <tr>
+		    <td>Potato</td>
+		    <td>100</td>
+		  </tr>
+		</table>
+	</div>
+	<br><br>
+	<div id="inventory_add_quantity">
+		<p><b>Add ingredient Quantity:</b></p>
+		<input type="text" name="ingredient_name" placeholder="ingredient_name"/>
+		<input type="number" name="quantity" placeholder="quantity"/>
+		<input type="submit" name="go">
+	</div>
+	<br><br>
+	<div id="inventory_add_new">
+		<p><b>Add new ingredient:</b></p>
+		<input type="text" name="ingredient_name" placeholder="ingredient_name"/>
+		<input type="number" name="quantity" placeholder="quantity"/>
+		<input type="submit" name="go">
+	</div>
+	<br><br>
+	<div id="food_add_new">
+		<p><b>Add new food item to menu:</b></p>
+		<input type="text" name="food_name" placeholder="ingredient_name"/>
+		<input type="number" name="cost" placeholder="cost"/>
+		<input type="number" name="num_ingredients" placeholder="total ingredients" max="10"/>
+		<ol>
+			<li><input type="text" name="ingredient1" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient2" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient3" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient4" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient5" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient6" placeholder="ingredient_name"/></li>
+			<li><input type="text" name="ingredient7" placeholder="ingredient_name"/></li>
+			
+		</ol>
+		<input type="submit" name="go">
+	</div>
+	<br><br>
+	<div id="food_sold">
+		<p><b>Enter strat date end date</b></p>
+		<input type="date" name="start_date"/>
+		<input type="date" name="end_date"/>
+		<input type="submit" name="go"/>
+		<table>
+		  <tr>
+		    <th>Food Item</th>
+		    <th>Quantity</th>
+		    <th>Amount(Rs.)</th>
+		  </tr>
+		  <tr>
+		    <td>Dosa</td>
+		    <td>100</td>
+		    <td>2000</td>
+		  </tr>
+		  <tr>
+		    <td>Idli</td>
+		    <td>500</td>
+		    <td>5000</td>
+		  </tr>
+		</table>
+	</div>
+</div>
+<br><br>
+
+</body>
+</html>
