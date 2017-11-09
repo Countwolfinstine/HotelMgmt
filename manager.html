@@ -22,7 +22,7 @@ tr:nth-child(even) {
 
 <div id="recommender_menu">
 	<p><b>Recommended Items to be prepared:</b></p>
-	<table>
+	<table id="recommender_menu_table">
 	  <tr>
 	    <th>Food Name</th>
 	    <th>Time</th>
@@ -47,7 +47,7 @@ tr:nth-child(even) {
 <div id="inventory">
 	<p><b> Inventory Items with quanities</b></p>
 	<div id="inventory_details">
-		<table>
+		<table id="inventory_details_table">
 		  <tr>
 		    <th>Ingredient</th>
 		    <th>Quantity</th>
@@ -63,44 +63,76 @@ tr:nth-child(even) {
 		</table>
 	</div>
 	<br><br>
-	<div id="inventory_add_quantity">
-		<p><b>Add ingredient Quantity:</b></p>
-		<input type="text" name="ingredient_name" placeholder="ingredient_name"/>
-		<input type="number" name="quantity" placeholder="quantity"/>
-		<input type="submit" name="go">
+	<div id="inventory_update_quantity">
+		<p><b>Update ingredient Quantity:</b></p>
+		<input type="text" name="update_ingredient_name" id="update_ingredient_name" placeholder="update_ingredient_name"/>
+		<input type="number" name="update_quantity" id="update_quantity" placeholder="update_quantity"/>
+		<input type="button" name="go" id="btn_inventory_update_quantity"/>
 	</div>
 	<br><br>
 	<div id="inventory_add_new">
 		<p><b>Add new ingredient:</b></p>
-		<input type="text" name="ingredient_name" placeholder="ingredient_name"/>
-		<input type="number" name="quantity" placeholder="quantity"/>
-		<input type="submit" name="go">
+		<input type="text" name="new_ingredient_name" id="new_ingredient_name" placeholder="new_ingredient_name"/>
+		<input type="number" name="new_ingredient_quantity" id="new_ingredient_quantity" placeholder="ingredient_quantity"/>
+		<input type="button" name="go" id="btn_inventory_add_new">
 	</div>
 	<br><br>
 	<div id="food_add_new">
 		<p><b>Add new food item to menu:</b></p>
-		<input type="text" name="food_name" placeholder="ingredient_name"/>
-		<input type="number" name="cost" placeholder="cost"/>
-		<input type="number" name="num_ingredients" placeholder="total ingredients" max="10"/>
+		<input type="text" name="food_name" id="food_name" placeholder="ingredient_name"/>
+		<input type="number" name="cost" id="cost" placeholder="cost"/>
+		<input type="number" name="num_ingredients" id="num_ingredients" placeholder="total ingredients" max="10"/>
 		<ol>
-			<li><input type="text" name="ingredient1" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient2" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient3" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient4" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient5" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient6" placeholder="ingredient_name"/></li>
-			<li><input type="text" name="ingredient7" placeholder="ingredient_name"/></li>
-			
+			<li>
+				<input type="text" name="food_ingredient_name1" id="food_ingredient_name1" placeholder="food_ingredient_name1"/>
+				<input type="number" name="food_ingredient_quantity1" id="food_ingredient_quantity1" placeholder="food_ingredient_quantity1"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name1" id="food_ingredient_name2" placeholder="food_ingredient_name2"/>
+				<input type="number" name="food_ingredient_quantity2" id="food_ingredient_quantity2" placeholder="food_ingredient_quantity2"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name3" id="food_ingredient_name3" placeholder="food_ingredient_name3"/>
+				<input type="number" name="food_ingredient_quantity3" id="food_ingredient_quantity3" placeholder="food_ingredient_quantity3"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name4" id="food_ingredient_name4" placeholder="food_ingredient_name4"/>
+				<input type="number" name="food_ingredient_quantity4" id="food_ingredient_quantity4" placeholder="food_ingredient_quantity4"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name5" id="food_ingredient_name5" placeholder="food_ingredient_name5"/>
+				<input type="number" name="food_ingredient_quantity5" id="food_ingredient_quantity5" placeholder="food_ingredient_quantity5"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name6" id="food_ingredient_name6" placeholder="food_ingredient_name6"/>
+				<input type="number" name="food_ingredient_quantity6" id="food_ingredient_quantity6" placeholder="food_ingredient_quantity6"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name7" id="food_ingredient_name7" placeholder="food_ingredient_name7"/>
+				<input type="number" name="food_ingredient_quantity7" id="food_ingredient_quantity7" placeholder="food_ingredient_quantity7"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name8" id="food_ingredient_name8" placeholder="food_ingredient_name8"/>
+				<input type="number" name="food_ingredient_quantity8" id="food_ingredient_quantity8" placeholder="food_ingredient_quantity8"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name9" id="food_ingredient_name9" placeholder="food_ingredient_name9"/>
+				<input type="number" name="food_ingredient_quantity9" id="food_ingredient_quantity9" placeholder="food_ingredient_quantity9"/>
+			</li>
+			<li>
+				<input type="text" name="food_ingredient_name10" id="food_ingredient_name10" placeholder="food_ingredient_name10"/>
+				<input type="number" name="food_ingredient_quantity10" id="food_ingredient_quantity10" placeholder="food_ingredient_quantity10"/>
+			</li>
 		</ol>
-		<input type="submit" name="go">
+		<input type="button" name="go" value="go" id="btn_food_add_new">
 	</div>
 	<br><br>
 	<div id="food_sold">
 		<p><b>Enter strat date end date</b></p>
-		<input type="date" name="start_date"/>
-		<input type="date" name="end_date"/>
-		<input type="submit" name="go"/>
-		<table>
+		<input type="date" name="start_date" id="start_date"/>
+		<input type="date" name="end_date" id="end_date"/>
+		<input type="button" name="go" id="btn_food_sold"/>
+		<table id="table_food_sold">
 		  <tr>
 		    <th>Food Item</th>
 		    <th>Quantity</th>
@@ -120,6 +152,78 @@ tr:nth-child(even) {
 	</div>
 </div>
 <br><br>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$.getJSON('/manager-api/',printTerms);
+		$("#btn_inventory_update_quantity").click(function(){
+			var ingredientName = $("#update_ingredient_name").value();
+			var ingredientQuantity = $("#update_ingredient_quantity").value();
+			
+			$.get("/manager-api/update-ingredient/"+ingredientName+"/"+ingredientQuantity, function(data,status){
+				alert("Data");
+			});
+			
+		});
+		$("#btn_inventory_add_quantity").click(function(){
+			var ingredientName = $("#add_ingredient_name").value();
+			var ingredientQuantity = $("#add_ingredient_quantity").value();
+			
+			$.get("/manager-api/add-ingredient/"+ingredientName+"/"+ingredientQuantity);	
+		});
+		
+		$("#btn_food_add_new").click(function(){
+			var foodName = $("#food_name").value();
+			var cost = $("#cost").value();
+			var noIngredients = $("#num_ingredients")
+			var ingArr = []
+			for(var i=0;i<noIngredients;i++){
+				ingArray.push({ingName:$("#food_ingredient_name"+i).value(), ingQuantity:$("#food_ingredient_quantity"+i).value()});
+			}
+			//ingredient array is not json find how to do this
+			$.post("/manager-api/add-food/",{foodName: $("#food_name").value(), cost: $("#cost").value(), ingredients: ingArray});	
+		});
+		
+		$('#btn_food_sold').click(function(){
+			var startDate = $("#start_date").value();
+			var endDate = $("#end_date").value();
+			$.getJSON('/manager-api/duration-food-sold/'+startDate+'/'+endDate, printDuration);
+		});
+		
+		
+	});
+	
+	function printTerms(terms){
+		var recommendedItems = terms[0];
+		var inventoryItems = terms[1];
+		$.each(recommendedItems,function(index,term){
+			$("#recommender_menu_table").append("<tr>"+
+			"<td>"+term[0]+"</td>"+
+			"<td>"+term[1]+"</td>"+
+			"<td>"+term[2]+"</td>"+
+			"<td>"+term[3]+"</td>"+
+			"</tr>");
+		});
+		$.each(inventoryItems,function(index,term){
+			$("#inventory_details_table").append("<tr>"+
+			"<td>"+term[0]+"</td>"+
+			"<td>"+term[1]+"</td>"+
+			"</tr>");
+		});
+		console.log('blue');
+		
+	}
+	
+	function printDuration(terms){
+		$.each(terms,function(index,term){
+			$('food_sold').append("<tr>"+
+			"<td>"+term['foodName']+"</td>"+
+			"<td>"+term['foodQuantity']+"</td>"+
+			"<td>"+term['foodAmount']+"</td>"+
+			"</tr>");
+		});
+	}
+	
 
+</script>
 </body>
 </html>
