@@ -1,4 +1,3 @@
-
 public class Main {
 	// calculate user-similarity using Jaccard's similarity
 	public double similarityValues[][];

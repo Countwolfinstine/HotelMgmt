@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
+-- version 4.4.14
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2017 at 11:47 AM
--- Server version: 10.1.26-MariaDB
--- PHP Version: 7.1.9
+-- Generation Time: Nov 09, 2017 at 12:44 PM
+-- Server version: 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `currentorder`
 --
 
-CREATE TABLE `currentorder` (
+CREATE TABLE IF NOT EXISTS `currentorder` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,19 +36,19 @@ CREATE TABLE `currentorder` (
 --
 
 INSERT INTO `currentorder` (`order_id`, `item_id`) VALUES
+(29, 2),
+(17, 3),
+(35, 3),
+(20, 4),
+(32, 4),
+(38, 4),
 (2, 5),
 (5, 5),
+(14, 5),
 (8, 10),
 (11, 10),
-(14, 5),
-(17, 3),
-(20, 4),
-(23, 13),
 (26, 10),
-(29, 2),
-(32, 4),
-(35, 3),
-(38, 4);
+(23, 13);
 
 -- --------------------------------------------------------
 
@@ -58,7 +56,7 @@ INSERT INTO `currentorder` (`order_id`, `item_id`) VALUES
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE `feedback` (
+CREATE TABLE IF NOT EXISTS `feedback` (
   `userid` int(11) NOT NULL,
   `feedback` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -69,11 +67,20 @@ CREATE TABLE `feedback` (
 -- Table structure for table `ingredients`
 --
 
-CREATE TABLE `ingredients` (
+CREATE TABLE IF NOT EXISTS `ingredients` (
   `ing_id` int(11) NOT NULL,
   `ing_name` varchar(30) NOT NULL,
   `quantity` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ingredients`
+--
+
+INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
+(1, 'Batter ', 1000),
+(2, 'Butter ', 10),
+(4, 'Milk', 20);
 
 -- --------------------------------------------------------
 
@@ -81,7 +88,7 @@ CREATE TABLE `ingredients` (
 -- Table structure for table `ingredients_required`
 --
 
-CREATE TABLE `ingredients_required` (
+CREATE TABLE IF NOT EXISTS `ingredients_required` (
   `ing_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `ing_quantity_required` int(11) NOT NULL
@@ -93,11 +100,11 @@ CREATE TABLE `ingredients_required` (
 -- Table structure for table `items`
 --
 
-CREATE TABLE `items` (
+CREATE TABLE IF NOT EXISTS `items` (
   `item_name` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -117,7 +124,7 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 ('Chole-Bhature', 11, 50),
 ('Puri', 12, 20),
 ('Naan', 13, 25),
-('Roti', 14, 25);
+('Roti', 15, 10);
 
 -- --------------------------------------------------------
 
@@ -125,7 +132,7 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 -- Table structure for table `order`
 --
 
-CREATE TABLE `order` (
+CREATE TABLE IF NOT EXISTS `order` (
   `tableid` int(11) NOT NULL,
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
@@ -186,7 +193,7 @@ INSERT INTO `order` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time
 -- Table structure for table `orderlog`
 --
 
-CREATE TABLE `orderlog` (
+CREATE TABLE IF NOT EXISTS `orderlog` (
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
@@ -246,7 +253,7 @@ INSERT INTO `orderlog` (`orderid`, `userid`, `itemid`, `quantity`, `time`) VALUE
 -- Table structure for table `rating`
 --
 
-CREATE TABLE `rating` (
+CREATE TABLE IF NOT EXISTS `rating` (
   `userid` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL
@@ -295,7 +302,7 @@ INSERT INTO `rating` (`userid`, `item_id`, `rating`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `emailid` varchar(40) NOT NULL,
   `userid` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
@@ -368,7 +375,8 @@ INSERT INTO `users` (`emailid`, `userid`, `password`, `fname`, `lname`, `autoriz
 -- Indexes for table `currentorder`
 --
 ALTER TABLE `currentorder`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`,`item_id`),
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `feedback`
@@ -380,7 +388,8 @@ ALTER TABLE `feedback`
 -- Indexes for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  ADD PRIMARY KEY (`ing_id`);
+  ADD PRIMARY KEY (`ing_id`),
+  ADD KEY `ing_id` (`ing_id`);
 
 --
 -- Indexes for table `ingredients_required`
@@ -393,13 +402,22 @@ ALTER TABLE `ingredients_required`
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `item_id` (`item_id`);
 
 --
 -- Indexes for table `order`
 --
 ALTER TABLE `order`
-  ADD PRIMARY KEY (`orderid`,`itemid`,`time`);
+  ADD PRIMARY KEY (`orderid`,`userid`),
+  ADD KEY `userid` (`userid`);
+
+--
+-- Indexes for table `orderlog`
+--
+ALTER TABLE `orderlog`
+  ADD PRIMARY KEY (`orderid`,`userid`),
+  ADD KEY `userid` (`userid`);
 
 --
 -- Indexes for table `rating`
@@ -415,6 +433,20 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`userid`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `ingredients`
+--
+ALTER TABLE `ingredients`
+  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `items`
+--
+ALTER TABLE `items`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
 -- Constraints for dumped tables
 --
 
@@ -422,6 +454,7 @@ ALTER TABLE `users`
 -- Constraints for table `currentorder`
 --
 ALTER TABLE `currentorder`
+  ADD CONSTRAINT `currentorder_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
   ADD CONSTRAINT `order_mapping` FOREIGN KEY (`order_id`) REFERENCES `order` (`orderid`);
 
 --
@@ -434,14 +467,27 @@ ALTER TABLE `feedback`
 -- Constraints for table `ingredients_required`
 --
 ALTER TABLE `ingredients_required`
-  ADD CONSTRAINT `ingredient_mapping2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+  ADD CONSTRAINT `Relational_mapping1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
+  ADD CONSTRAINT `Relational_mapping2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
+
+--
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
+
+--
+-- Constraints for table `orderlog`
+--
+ALTER TABLE `orderlog`
+  ADD CONSTRAINT `orderlog_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`),
+  ADD CONSTRAINT `orderlog_ibfk_2` FOREIGN KEY (`orderid`) REFERENCES `order` (`orderid`);
 
 --
 -- Constraints for table `rating`
 --
 ALTER TABLE `rating`
   ADD CONSTRAINT `rating_mapping2` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
