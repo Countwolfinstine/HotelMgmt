@@ -53,7 +53,6 @@ app.delete("/queue-api/:term", function(req,res){
 
 app.get("/manager-api/update-ingredient/:ingredientName/:ingredientQuantity", function(req,res){
     console.log("request for ingredient updation");
-    console.log("UPDATE ingredients SET quantity = " + req.params.ingredientQuantity + " WHERE ing_name = " + req.params.ingredientName);
     con.query("UPDATE ingredients SET quantity = " + req.params.ingredientQuantity + " WHERE ing_name = \"" + req.params.ingredientName + "\"", function(err, result, fields){
          if (err) throw err;
          res.send(result);
@@ -62,10 +61,53 @@ app.get("/manager-api/update-ingredient/:ingredientName/:ingredientQuantity", fu
 
 app.get("/manager-api/add-ingredient/:ingredientName/:ingredientQuantity", function(req,res){
     console.log("request for ingredient updation");
-
     con.query("INSERT INTO ingredients (ing_id, ing_name, quantity) VALUES ( NULL , \""  + req.params.ingredientName + "\", " + req.params.ingredientQuantity+ ");", function(err, result, fields){
          if (err) throw err;
          res.send(result);
+    });
+});
+
+app.get("/manager-api/add-food/:foodname/:cost", function(req,res){
+   con.query("INSERT INTO items (item_name, item_id, price) VALUES ( \""  + req.params.foodname + "\", NULL, " + req.params.cost + ");", function(err, result, fields){
+         if (err) throw err;
+         res.send(result);
+    });
+});
+
+var foodId;
+var ingId;
+app.get("/manager-api/add-food-ingredient/:foodName/:ingredientName/:quantity", function(req,res){
+    
+    con.query("SELECT item_id FROM items WHERE item_name =  \"" + req.params.foodName + "\"", function(err, result, fields){
+        console.log(result);
+        global.foodId= result[0].item_id;
+        console.log(global.foodId);
+        con.query("SELECT ing_id FROM ingredients WHERE ing_name =  \"" + req.params.ingredientName + "\"", function(err, result, fields){
+        console.log(result); 
+        global.ingId= result[0].ing_id;
+        console.log(global.ingId);
+        con.query("INSERT INTO ingredients_required (ing_id, item_id, ing_quantity_required) VALUES ( " + global.ingId + "," + global.foodId + "," + req.params.quantity +");", function(err, result, fields){
+         if (err) throw err;
+         res.send(result);
+    });
+
+
+    });
+   //  con.query("SELECT ing_id FROM ingredients WHERE ing_name =  \"" + req.params.ingredientName + "\"", function(err, result, fields){
+   //      console.log(result); 
+   //      global.ingId= result[0].ing_id;
+   //      console.log(global.ingId);
+   //      con.query("INSERT INTO ingredients_required (ing_id, item_id, ing_quantity_required) VALUES ( " + global.ingId + "," + global.foodId + "," + req.params.quantity +");", function(err, result, fields){
+   //       if (err) throw err;
+   //       res.send(result);
+   //  });
+
+   //   });
+   // console.log("INSERT INTO ingredients_required (ing_id, item_id, ing_quantity_required) VALUES ( " + global.ingId + "," + global.foodId + "," + req.params.quantity +");");
+   
+   // con.query("INSERT INTO ingredients_required (ing_id, item_id, ing_quantity_required) VALUES ( " + global.ingId + "," + global.foodId + "," + req.params.quantity +");", function(err, result, fields){
+   //       if (err) throw err;
+   //       res.send(result);
     });
 });
 
