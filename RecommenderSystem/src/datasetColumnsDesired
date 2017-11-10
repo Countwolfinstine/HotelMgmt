@@ -1,3 +1,0 @@
-Desired format of the dataset for Recommender System - 
-should contain the following columns - 
-UserId, ItemId, Price (of the item), Rating 
