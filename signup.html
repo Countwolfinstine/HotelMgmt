@@ -62,35 +62,32 @@
     </div>
 </div>
 <script type = "text/javascript">
-	function printTerms(gg){
-		window.alert("Sucessfully registered");
-	};
-	// $("#reset").click(function(){
-	// 	$("#userName").val() = "";
-	// 	$("#inputEmail").val() = "";
-	// 	$("#inputPassword").val() = "";
-	// 	$("#retypePassword").val() = "";
-	// });
-	// $("#signup").click(function(){
-	// 	// var name = $("#userName").val();
-	// 	// var email = $("#inputEmail").val();
-	// 	// var password = $("#inputPassword").val();
-	// 	// var retypePassword = $("#retypePassword").val();
-	// 	// if (password != retypePassword){
-	// 	// 	window.alert('Password Doesn\' match ');
-	// 	// 	$("#reset").trigger("#click");
-	// 	// }
-	// 	// else{
-	// 	 	 $.post('/signup-api', {username: $("#userName").val(), email: $('#inputEmail').val()}, printTerms);
-	// 		console.log('gfgdf');
-			
-	// 	}
-	// });
-    $('form').submit(function (e) {
-        e.preventDefault();
-        $.post('/dictionary-api', {term: $('#userName').val(), defined: $('#inputPassword').val()}, printTerms);
-        this.reset();
-    });
+function printTerms(gg){
+	$("#inputPassword").val("") ;
+    $("#retypePassword").val("") ;
+};
+
+function successfulLogin(){
+    window.alert("Successfully Registered");
+}
+
+$("#reset").click(function(){
+	$("#userName").val() = "";
+	$("#inputEmail").val() = "";
+	$("#inputPassword").val() = "";
+	$("#retypePassword").val() = "";
+});
+
+$('form').submit(function (e) {
+    e.preventDefault();
+    if($("#inputPassword").val() != $("#retypePassword").val()){
+        window.alert("Passwords didn't match");
+        printTerms();
+    }
+    else{
+        $.post('/signup-api', { username: $('#userName').val(), password: $('#inputPassword').val(), email:$("#inputEmail").val(), phoneNumber: $('#phoneNumber').val() });
+    }
+});
 
 
 </script>

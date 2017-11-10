@@ -91,28 +91,43 @@ app.get("/manager-api/add-food-ingredient/:foodName/:ingredientName/:quantity", 
     });
 });
 
+app.post("/signup-api",function(req,res){
+
+    console.log(req.body.userName);
+    con.query("INSERT INTO users (emailid, userid, password, username, autorization) VALUES (\" " + req.body.email + "\", NULL, +\"" + req.body.password + "\",\"" + req.body.username + "\", \" Customer\" );", function(err,result,fields){
+        if(err) throw err;
+        res.send(result);
+    })
+
+});
 
 app.get("/menu-display/:usserid",function(req,res){    
-    var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'json'});    
-    con.query("SELECT * from currentorder", function(err,results,fields){
-        console.log(results);
-        if(err) throw err;
-        shell.send(results);
-        shell.on('message', function (message) {
-            // received a message sent from the Python script (a simple "print" statement)
-            console.log(message);
-        });
-        // end the input stream and allow the process to exit
-        shell.end(function (err) {
-            if (err) throw err;
-            console.log('finished');
-        });
-    });
-    con.query("SELECT * FROM currentorder", function (err, result, fields) {
+    // var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'json'});    
+    // con.query("SELECT * from currentorder", function(err,results,fields){
+    //     console.log(results);
+    //     if(err) throw err;
+    //     shell.send(results);
+    //     shell.on('message', function (message) {
+    //         // received a message sent from the Python script (a simple "print" statement)
+    //         console.log(message);
+    //     });
+    //     // end the input stream and allow the process to exit
+    //     shell.end(function (err) {
+    //         if (err) throw err;
+    //         console.log('finished');
+    //     });
+    // });
+    con.query("SELECT * FROM items", function (err, result, fields) {
         if (err) throw err;
         res.send(result);
     });
-    
+});
+
+app.post("/waiter-input",function(req,res){
+
+
+
+
 });
 
 app.listen(3000);
