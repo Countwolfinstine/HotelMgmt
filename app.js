@@ -130,6 +130,19 @@ app.post("/waiter-input",function(req,res){
 
 });
 
+app.get("/get-menu/:userId",function(req,res) {
+  con.query("SELECT * FROM items",function(err,results,fields){
+    console.log("hello");
+    console.log(results);
+    if(err) throw err;
+    res.send(results);
+  });
+});
+
+app.post("/submit-order/",function(req,res){
+  console.log(req);
+});
+
 app.listen(3000);
 
 console.log("Express running on port 3000");
