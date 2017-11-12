@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2017 at 12:44 PM
+-- Generation Time: Nov 12, 2017 at 06:41 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
   `ing_id` int(11) NOT NULL,
   `ing_name` varchar(30) NOT NULL,
   `quantity` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ingredients`
@@ -80,7 +80,8 @@ CREATE TABLE IF NOT EXISTS `ingredients` (
 INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
 (1, 'Batter ', 1000),
 (2, 'Butter ', 10),
-(4, 'Milk', 20);
+(4, 'Milk', 20),
+(6, 'choco', 500);
 
 -- --------------------------------------------------------
 
@@ -94,6 +95,14 @@ CREATE TABLE IF NOT EXISTS `ingredients_required` (
   `ing_quantity_required` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ingredients_required`
+--
+
+INSERT INTO `ingredients_required` (`ing_id`, `item_id`, `ing_quantity_required`) VALUES
+(1, 1, 5),
+(1, 17, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -104,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `items` (
   `item_name` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -124,7 +133,9 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 ('Chole-Bhature', 11, 50),
 ('Puri', 12, 20),
 ('Naan', 13, 25),
-('Roti', 15, 10);
+('Roti', 15, 10),
+('stones', 16, 10),
+('golmal', 17, 100);
 
 -- --------------------------------------------------------
 
@@ -306,66 +317,66 @@ CREATE TABLE IF NOT EXISTS `users` (
   `emailid` varchar(40) NOT NULL,
   `userid` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `fname` varchar(20) NOT NULL,
-  `lname` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
   `autorization` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`emailid`, `userid`, `password`, `fname`, `lname`, `autorization`) VALUES
-('Surya.Shankar93@live.com', 1, 'WnqIcnlA', 'Surya', 'Shankar', 'Waiter'),
-('Rajesh.Kumar15@hotmail.com', 2, 'ZmfiPvBZ', 'Rajesh', 'Kumar', 'Waiter'),
-('Ram.Jain50@hotmail.com', 3, 'RoJUZXW', 'Ram', 'Jain', 'Waiter'),
-('Surya.Jain88@hotmail.com', 4, 'IrbrkKiOY', 'Surya', 'Jain', 'Customer'),
-('Ram.Kumar80@live.com', 5, 'fGFNQtX', 'Ram', 'Kumar', 'Customer'),
-('Sam.Prasad75@live.com', 6, 'ONzTaFAjn', 'Sam', 'Prasad', 'Waiter'),
-('Ramesh.John80@gmail.com', 7, 'QSxJkcrT', 'Ramesh', 'John', 'Waiter'),
-('Tom.Prasad13@hotmail.com', 8, 'YBbILjBB', 'Tom', 'Prasad', 'Waiter'),
-('Rajesh.Shankar92@yahoo.com', 9, 'RFDEwhXO', 'Rajesh', 'Shankar', 'Customer'),
-('Ramesh.John69@hotmail.com', 10, 'vqjFAjJwI', 'Ramesh', 'John', 'Waiter'),
-('Rajesh.Jain78@gmail.com', 11, 'hTxJfNgzR', 'Rajesh', 'Jain', 'Customer'),
-('Ramesh.Iyer23@live.com', 12, 'txMYMRViY', 'Ramesh', 'Iyer', 'Customer'),
-('Sam.Shankar68@yahoo.com', 13, 'gozBpLcc', 'Sam', 'Shankar', 'Waiter'),
-('Tom.Prasad43@gmail.com', 14, 'zSFJalPzZ', 'Tom', 'Prasad', 'Customer'),
-('Tom.Jain23@yahoo.com', 15, 'xOdIqTh', 'Tom', 'Jain', 'Customer'),
-('Sham.Shankar9@yahoo.com', 16, 'sbgaGCxR', 'Sham', 'Shankar', 'Customer'),
-('Rajesh.Iyer32@yahoo.com', 17, 'SeWuCfLN', 'Rajesh', 'Iyer', 'Customer'),
-('Sham.Jain65@yahoo.com', 18, 'qQfvzicU', 'Sham', 'Jain', 'Customer'),
-('Ram.Shankar78@gmail.com', 19, 'blAKCXC', 'Ram', 'Shankar', 'Customer'),
-('Ram.Prasad41@gmail.com', 20, 'cEZYoiFA', 'Ram', 'Prasad', 'Customer'),
-('Sam.Iyer94@yahoo.com', 21, 'AsGWREZ', 'Sam', 'Iyer', 'Customer'),
-('Ram.Shankar2@live.com', 22, 'ikhMAHuo', 'Ram', 'Shankar', 'Customer'),
-('Rajesh.Kumar84@yahoo.com', 23, 'ZtsfVlL', 'Rajesh', 'Kumar', 'Customer'),
-('Sham.John15@hotmail.com', 24, 'QJQiYHB', 'Sham', 'John', 'Customer'),
-('Rajesh.Jain36@live.com', 25, 'fTEfGft', 'Rajesh', 'Jain', 'Customer'),
-('Rajesh.Iyer93@hotmail.com', 26, 'jjhaoOnK', 'Rajesh', 'Iyer', 'Customer'),
-('Sham.Shankar75@live.com', 27, 'mDhyTmxrj', 'Sham', 'Shankar', 'Customer'),
-('Tom.Iyer55@yahoo.com', 28, 'WrvDPzCel', 'Tom', 'Iyer', 'Customer'),
-('Rajesh.Iyer64@live.com', 29, 'QKBVgzqb', 'Rajesh', 'Iyer', 'Customer'),
-('Rajesh.Prasad57@live.com', 30, 'gScyVrNJR', 'Rajesh', 'Prasad', 'Customer'),
-('Ramesh.John3@yahoo.com', 31, 'JPmauFRVW', 'Ramesh', 'John', 'Customer'),
-('Sham.Shankar98@hotmail.com', 32, 'zjnAxyff', 'Sham', 'Shankar', 'Customer'),
-('Sham.John16@hotmail.com', 33, 'XncLJfZX', 'Sham', 'John', 'Customer'),
-('Sam.Prasad3@yahoo.com', 34, 'nRVnKfx', 'Sam', 'Prasad', 'Customer'),
-('Rajesh.Prasad47@yahoo.com', 35, 'UXjeCNY', 'Rajesh', 'Prasad', 'Customer'),
-('Ramesh.Shankar71@gmail.com', 36, 'KIbAFFdk', 'Ramesh', 'Shankar', 'Customer'),
-('Tom.Bhat6@gmail.com', 37, 'hBcgIFCvT', 'Tom', 'Bhat', 'Customer'),
-('Sham.Jain6@hotmail.com', 38, 'GDPGoAO', 'Sham', 'Jain', 'Customer'),
-('Tom.John18@yahoo.com', 39, 'WqukViqCN', 'Tom', 'John', 'Customer'),
-('Sam.Shankar98@yahoo.com', 40, 'XurVXHFm', 'Sam', 'Shankar', 'Customer'),
-('Ram.John62@live.com', 41, 'xqxSTJV', 'Ram', 'John', 'Customer'),
-('Sham.John76@live.com', 42, 'gwuqaYeH', 'Sham', 'John', 'Customer'),
-('Rajesh.Iyer87@yahoo.com', 43, 'HVNaYiw', 'Rajesh', 'Iyer', 'Customer'),
-('Ram.Prasad30@live.com', 44, 'fyBrVKvU', 'Ram', 'Prasad', 'Customer'),
-('Ramesh.Shankar22@gmail.com', 45, 'qXUQOXqEI', 'Ramesh', 'Shankar', 'Customer'),
-('Tom.Jain29@live.com', 46, 'UtmaAWq', 'Tom', 'Jain', 'Customer'),
-('Surya.John51@gmail.com', 47, 'yegIdCIW', 'Surya', 'John', 'Customer'),
-('Surya.Prasad96@yahoo.com', 48, 'YThshkdA', 'Surya', 'Prasad', 'Customer'),
-('Surya.Bhat83@gmail.com', 49, 'ZbfWmrQM', 'Surya', 'Bhat', 'Customer'),
-('Sham.John52@live.com', 50, 'JWdVVGj', 'Sham', 'John', 'Customer');
+INSERT INTO `users` (`emailid`, `userid`, `password`, `username`, `autorization`) VALUES
+('Surya.Shankar93@live.com', 1, 'WnqIcnlA', 'Surya', 'Waiter'),
+('Rajesh.Kumar15@hotmail.com', 2, 'ZmfiPvBZ', 'Rajesh', 'Waiter'),
+('Ram.Jain50@hotmail.com', 3, 'RoJUZXW', 'Ram', 'Waiter'),
+('Surya.Jain88@hotmail.com', 4, 'IrbrkKiOY', 'Surya', 'Customer'),
+('Ram.Kumar80@live.com', 5, 'fGFNQtX', 'Ram', 'Customer'),
+('Sam.Prasad75@live.com', 6, 'ONzTaFAjn', 'Sam', 'Waiter'),
+('Ramesh.John80@gmail.com', 7, 'QSxJkcrT', 'Ramesh', 'Waiter'),
+('Tom.Prasad13@hotmail.com', 8, 'YBbILjBB', 'Tom', 'Waiter'),
+('Rajesh.Shankar92@yahoo.com', 9, 'RFDEwhXO', 'Rajesh', 'Customer'),
+('Ramesh.John69@hotmail.com', 10, 'vqjFAjJwI', 'Ramesh', 'Waiter'),
+('Rajesh.Jain78@gmail.com', 11, 'hTxJfNgzR', 'Rajesh', 'Customer'),
+('Ramesh.Iyer23@live.com', 12, 'txMYMRViY', 'Ramesh', 'Customer'),
+('Sam.Shankar68@yahoo.com', 13, 'gozBpLcc', 'Sam', 'Waiter'),
+('Tom.Prasad43@gmail.com', 14, 'zSFJalPzZ', 'Tom', 'Customer'),
+('Tom.Jain23@yahoo.com', 15, 'xOdIqTh', 'Tom', 'Customer'),
+('Sham.Shankar9@yahoo.com', 16, 'sbgaGCxR', 'Sham', 'Customer'),
+('Rajesh.Iyer32@yahoo.com', 17, 'SeWuCfLN', 'Rajesh', 'Customer'),
+('Sham.Jain65@yahoo.com', 18, 'qQfvzicU', 'Sham', 'Customer'),
+('Ram.Shankar78@gmail.com', 19, 'blAKCXC', 'Ram', 'Customer'),
+('Ram.Prasad41@gmail.com', 20, 'cEZYoiFA', 'Ram', 'Customer'),
+('Sam.Iyer94@yahoo.com', 21, 'AsGWREZ', 'Sam', 'Customer'),
+('Ram.Shankar2@live.com', 22, 'ikhMAHuo', 'Ram', 'Customer'),
+('Rajesh.Kumar84@yahoo.com', 23, 'ZtsfVlL', 'Rajesh', 'Customer'),
+('Sham.John15@hotmail.com', 24, 'QJQiYHB', 'Sham', 'Customer'),
+('Rajesh.Jain36@live.com', 25, 'fTEfGft', 'Rajesh', 'Customer'),
+('Rajesh.Iyer93@hotmail.com', 26, 'jjhaoOnK', 'Rajesh', 'Customer'),
+('Sham.Shankar75@live.com', 27, 'mDhyTmxrj', 'Sham', 'Customer'),
+('Tom.Iyer55@yahoo.com', 28, 'WrvDPzCel', 'Tom', 'Customer'),
+('Rajesh.Iyer64@live.com', 29, 'QKBVgzqb', 'Rajesh', 'Customer'),
+('Rajesh.Prasad57@live.com', 30, 'gScyVrNJR', 'Rajesh', 'Customer'),
+('Ramesh.John3@yahoo.com', 31, 'JPmauFRVW', 'Ramesh', 'Customer'),
+('Sham.Shankar98@hotmail.com', 32, 'zjnAxyff', 'Sham', 'Customer'),
+('Sham.John16@hotmail.com', 33, 'XncLJfZX', 'Sham', 'Customer'),
+('Sam.Prasad3@yahoo.com', 34, 'nRVnKfx', 'Sam', 'Customer'),
+('Rajesh.Prasad47@yahoo.com', 35, 'UXjeCNY', 'Rajesh', 'Customer'),
+('Ramesh.Shankar71@gmail.com', 36, 'KIbAFFdk', 'Ramesh', 'Customer'),
+('Tom.Bhat6@gmail.com', 37, 'hBcgIFCvT', 'Tom', 'Customer'),
+('Sham.Jain6@hotmail.com', 38, 'GDPGoAO', 'Sham', 'Customer'),
+('Tom.John18@yahoo.com', 39, 'WqukViqCN', 'Tom', 'Customer'),
+('Sam.Shankar98@yahoo.com', 40, 'XurVXHFm', 'Sam', 'Customer'),
+('Ram.John62@live.com', 41, 'xqxSTJV', 'Ram', 'Customer'),
+('Sham.John76@live.com', 42, 'gwuqaYeH', 'Sham', 'Customer'),
+('Rajesh.Iyer87@yahoo.com', 43, 'HVNaYiw', 'Rajesh', 'Customer'),
+('Ram.Prasad30@live.com', 44, 'fyBrVKvU', 'Ram', 'Customer'),
+('Ramesh.Shankar22@gmail.com', 45, 'qXUQOXqEI', 'Ramesh', 'Customer'),
+('Tom.Jain29@live.com', 46, 'UtmaAWq', 'Tom', 'Customer'),
+('Surya.John51@gmail.com', 47, 'yegIdCIW', 'Surya', 'Customer'),
+('Surya.Prasad96@yahoo.com', 48, 'YThshkdA', 'Surya', 'Customer'),
+('Surya.Bhat83@gmail.com', 49, 'ZbfWmrQM', 'Surya', 'Customer'),
+('Sham.John52@live.com', 50, 'JWdVVGj', 'Sham', 'Customer'),
+('a@gmail.com', 51, 'asdfa', 'adfa', 'Customer');
 
 --
 -- Indexes for dumped tables
@@ -430,7 +441,8 @@ ALTER TABLE `rating`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userid`);
+  ADD PRIMARY KEY (`userid`),
+  ADD KEY `emailid` (`emailid`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -440,12 +452,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- Constraints for dumped tables
 --
@@ -461,7 +478,7 @@ ALTER TABLE `currentorder`
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `user_mapping` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
+  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
 
 --
 -- Constraints for table `ingredients_required`
@@ -480,14 +497,7 @@ ALTER TABLE `order`
 -- Constraints for table `orderlog`
 --
 ALTER TABLE `orderlog`
-  ADD CONSTRAINT `orderlog_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`),
   ADD CONSTRAINT `orderlog_ibfk_2` FOREIGN KEY (`orderid`) REFERENCES `order` (`orderid`);
-
---
--- Constraints for table `rating`
---
-ALTER TABLE `rating`
-  ADD CONSTRAINT `rating_mapping2` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
