@@ -94,7 +94,7 @@ app.get("/manager-api/add-food-ingredient/:foodName/:ingredientName/:quantity", 
 app.post("/signup-api",function(req,res){
 
     console.log(req.body.userName);
-    con.query("INSERT INTO users (emailid, userid, password, username, autorization) VALUES (\" " + req.body.email + "\", NULL, +\"" + req.body.password + "\",\"" + req.body.username + "\", \" Customer\" );", function(err,result,fields){
+    con.query("INSERT INTO users (emailid, userid, password, username, autorization) VALUES (\"" + req.body.email + "\", NULL, +\"" + req.body.password + "\",\"" + req.body.username + "\", \" Customer\" );", function(err,result,fields){
         if(err) throw err;
         res.send(result);
     })
