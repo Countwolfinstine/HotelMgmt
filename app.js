@@ -101,6 +101,15 @@ app.post("/signup-api",function(req,res){
 
 });
 
+
+app.post("/login-api", function(req,res){
+    console.log("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY userid ASC")
+    con.query("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY `userid` ASC", function(err,result,fields){
+        console.log(result.length)
+        res.send(result)
+    });
+});
+
 app.get("/menu-display/:usserid",function(req,res){    
     // var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'json'});    
     // con.query("SELECT * from currentorder", function(err,results,fields){
