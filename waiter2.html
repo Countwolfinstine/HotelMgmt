@@ -44,9 +44,9 @@
 <div id="bill">
 	<table id="table_bill">
 		<tr>
-			<th>Item Id</th>
 			<th>Item name</th>
 			<th>Quantity</th>
+			<th>Price</th>
 			<th>Amount</th>
 		</tr>
 	</table>	
@@ -65,8 +65,9 @@
 			window.location.href = "index.html"
 		});
 
-		$("btn_check").click(function(){
-			$.getJSON("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo"),printCheck);
+		$("#btn_check").click(function(){
+			console.log("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
+			$.getJSON("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val(),printCheck);
 		});
 
 	});
@@ -82,15 +83,23 @@
 	}
 
 	function printCheck(terms){
-		var items = terms[0];
+		var total = 0
 		$.each(terms,function(index,term){
+			total+=term['quantity']*term['price'];
 			$("#table_bill").append("<tr>"+
-				"<td>"+term['item_id']+"</td>"+
 				"<td>"+term['item_name']+"</td>"+
 				"<td>"+term['quantity']+"</td>"+
 				"<td>"+term['price']+"</td>"+
+				"<td>"+term['quantity']*term['price']+"</td>"+
 				"</tr>");
-		});	
+		});
+		$("#table_bill").append("<tr>"+
+			"<td>TOTAL</td>"+
+			"<td></td>"+
+			"<td></td>"+
+			"<td>"+total+"</td>"+
+			"</tr>");
+
 	}
 
 

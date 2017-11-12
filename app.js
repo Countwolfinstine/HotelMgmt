@@ -31,7 +31,7 @@ app.use(cors());
 
 con.connect();
 app.get("/queue-api",function(req,res){
-    con.query("SELECT * FROM currentorder", function (err, result, fields) {
+    con.query("SELECT * FROM current_orders", function (err, result, fields) {
         if (err) throw err;
         res.send(result);
     });
@@ -43,7 +43,7 @@ app.post("/queue-api", function(req, res){
 
 app.delete("/queue-api/:term", function(req,res){
     console.log("gg");
-    con.query("SELECT * FROM currentorder", function (err, result, fields) {
+    con.query("SELECT * FROM current_orders", function (err, result, fields) {
         if (err) throw err;
         res.send(result);
     });
@@ -112,7 +112,7 @@ app.post("/login-api", function(req,res){
 
 app.get("/menu-display/:usserid",function(req,res){    
     // var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'json'});    
-    // con.query("SELECT * from currentorder", function(err,results,fields){
+    // con.query("SELECT * from current_orders", function(err,results,fields){
     //     console.log(results);
     //     if(err) throw err;
     //     shell.send(results);
@@ -137,6 +137,19 @@ app.post("/waiter-input",function(req,res){
 
 
 
+});
+
+
+
+
+app.get("/check/:userId/:tableNo",function(req,res){
+    console.log("SELECT order_billing.itemid, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo);
+    con.query("SELECT item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err,result,fields){
+        console.log(result[0]['itemid']);
+        console.log(result[0]['quantity']);
+        res.send(result);
+        
+    });
 });
 
 app.get("/get-menu/:userId",function(req,res) {
@@ -166,26 +179,26 @@ app.post("/submit-order/",function(req,res){
         
             //console.log(req['body'][i]);
             //INSERT INTO `restaurantmanagement`.`order` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES ('3', '13', '3', '3', '2', CURRENT_TIMESTAMP);
-            console.log("INSERT INTO allorders(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);");
-            con.query("INSERT INTO allorders(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
+            console.log("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);");
+            con.query("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
                 if(err1) throw err1;
-                console.log("SELECT * FROM allorders WHERE orderid = " + result1.insertId )
-                con.query("SELECT * FROM allorders WHERE orderid = " + result1.insertId , function(err5,result5,fields5){
+                console.log("SELECT * FROM order_billing WHERE orderid = " + result1.insertId )
+                con.query("SELECT * FROM order_billing WHERE orderid = " + result1.insertId , function(err5,result5,fields5){
                      if(err5) throw err5;      
                      console.log("select works")  
                      console.log(result5[0].itemid)
-                    con.query("INSERT INTO orderlog(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
+                    con.query("INSERT INTO orders_log(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
                         if(err2) throw err2;
                         //res.send(result2);
-                        //INSERT INTO `restaurantmanagement`.`currentorder` (`order_id`, `item_id`) VALUES ('3', '3');
-                        console.log("orderlog");
+                        //INSERT INTO `restaurantmanagement`.`current_orders` (`order_id`, `item_id`) VALUES ('3', '3');
+                        console.log("orders_log");
                        
                         
                     });
-                    console.log("INSERT INTO currentorder(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
-                    con.query("INSERT INTO currentorder(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
+                    console.log("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
+                    con.query("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
                         if(err3) throw err3;
-                        console.log("currentorder");
+                        console.log("current_orders");
                         //res.send(result3);
                     });                    
                  });    
