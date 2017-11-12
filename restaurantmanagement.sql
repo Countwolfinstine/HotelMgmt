@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2017 at 06:41 AM
+-- Generation Time: Nov 12, 2017 at 10:16 AM
 -- Server version: 5.6.26
 -- PHP Version: 5.6.12
 
@@ -19,6 +19,67 @@ SET time_zone = "+00:00";
 --
 -- Database: `restaurantmanagement`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `allorders`
+--
+
+CREATE TABLE IF NOT EXISTS `allorders` (
+  `tableid` int(11) NOT NULL,
+  `orderid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `itemid` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `allorders`
+--
+
+INSERT INTO `allorders` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES
+(4, 1, 15, 1, 1, '2017-09-08 11:44:18'),
+(2, 2, 36, 5, 4, '2017-09-08 04:22:40'),
+(3, 3, 17, 1, 4, '2017-09-08 15:25:13'),
+(1, 4, 40, 13, 3, '2017-09-08 16:42:07'),
+(1, 5, 47, 5, 2, '2017-09-08 04:09:18'),
+(3, 6, 16, 4, 3, '2017-09-08 02:00:31'),
+(3, 7, 46, 1, 1, '2017-09-08 06:44:04'),
+(3, 8, 29, 10, 2, '2017-09-08 13:42:20'),
+(3, 9, 11, 7, 1, '2017-09-08 14:24:25'),
+(4, 10, 21, 8, 3, '2017-09-08 10:22:31'),
+(2, 11, 14, 10, 3, '2017-09-08 10:01:35'),
+(1, 12, 19, 12, 1, '2017-09-08 07:54:52'),
+(3, 13, 24, 9, 3, '2017-09-08 04:14:12'),
+(1, 14, 25, 5, 1, '2017-09-08 15:02:51'),
+(3, 15, 32, 4, 1, '2017-09-08 08:50:58'),
+(2, 16, 23, 11, 1, '2017-09-08 12:48:46'),
+(3, 17, 45, 3, 4, '2017-09-08 15:49:09'),
+(4, 18, 35, 12, 3, '2017-09-08 02:49:15'),
+(3, 19, 39, 6, 1, '2017-09-08 05:31:37'),
+(4, 20, 5, 4, 1, '2017-09-08 07:49:04'),
+(1, 21, 11, 14, 2, '2017-09-08 08:43:46'),
+(1, 22, 23, 6, 2, '2017-09-08 05:44:49'),
+(2, 23, 25, 13, 1, '2017-09-08 09:57:34'),
+(4, 24, 12, 4, 4, '2017-09-08 06:00:55'),
+(3, 25, 27, 2, 4, '2017-09-08 02:22:09'),
+(3, 26, 26, 10, 2, '2017-09-08 16:44:02'),
+(4, 27, 14, 6, 2, '2017-09-08 03:14:23'),
+(2, 28, 14, 9, 1, '2017-09-08 13:26:02'),
+(3, 29, 39, 2, 4, '2017-09-08 05:47:03'),
+(3, 30, 44, 1, 2, '2017-09-08 05:23:34'),
+(3, 31, 43, 4, 2, '2017-09-08 02:56:02'),
+(2, 32, 5, 4, 1, '2017-09-08 16:32:32'),
+(3, 33, 41, 7, 2, '2017-09-08 10:38:07'),
+(4, 34, 43, 8, 4, '2017-09-08 14:51:37'),
+(3, 35, 33, 3, 2, '2017-09-08 02:19:27'),
+(2, 36, 37, 7, 4, '2017-09-08 11:16:57'),
+(4, 37, 38, 9, 4, '2017-09-08 03:46:40'),
+(3, 38, 32, 4, 4, '2017-09-08 14:22:56'),
+(2, 39, 33, 2, 4, '2017-09-08 07:51:32'),
+(2, 40, 47, 8, 3, '2017-09-08 08:21:30');
 
 -- --------------------------------------------------------
 
@@ -136,67 +197,6 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 ('Roti', 15, 10),
 ('stones', 16, 10),
 ('golmal', 17, 100);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order`
---
-
-CREATE TABLE IF NOT EXISTS `order` (
-  `tableid` int(11) NOT NULL,
-  `orderid` int(11) NOT NULL,
-  `userid` int(11) NOT NULL,
-  `itemid` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES
-(4, 1, 15, 1, 1, '2017-09-08 11:44:18'),
-(2, 2, 36, 5, 4, '2017-09-08 04:22:40'),
-(3, 3, 17, 1, 4, '2017-09-08 15:25:13'),
-(1, 4, 40, 13, 3, '2017-09-08 16:42:07'),
-(1, 5, 47, 5, 2, '2017-09-08 04:09:18'),
-(3, 6, 16, 4, 3, '2017-09-08 02:00:31'),
-(3, 7, 46, 1, 1, '2017-09-08 06:44:04'),
-(3, 8, 29, 10, 2, '2017-09-08 13:42:20'),
-(3, 9, 11, 7, 1, '2017-09-08 14:24:25'),
-(4, 10, 21, 8, 3, '2017-09-08 10:22:31'),
-(2, 11, 14, 10, 3, '2017-09-08 10:01:35'),
-(1, 12, 19, 12, 1, '2017-09-08 07:54:52'),
-(3, 13, 24, 9, 3, '2017-09-08 04:14:12'),
-(1, 14, 25, 5, 1, '2017-09-08 15:02:51'),
-(3, 15, 32, 4, 1, '2017-09-08 08:50:58'),
-(2, 16, 23, 11, 1, '2017-09-08 12:48:46'),
-(3, 17, 45, 3, 4, '2017-09-08 15:49:09'),
-(4, 18, 35, 12, 3, '2017-09-08 02:49:15'),
-(3, 19, 39, 6, 1, '2017-09-08 05:31:37'),
-(4, 20, 5, 4, 1, '2017-09-08 07:49:04'),
-(1, 21, 11, 14, 2, '2017-09-08 08:43:46'),
-(1, 22, 23, 6, 2, '2017-09-08 05:44:49'),
-(2, 23, 25, 13, 1, '2017-09-08 09:57:34'),
-(4, 24, 12, 4, 4, '2017-09-08 06:00:55'),
-(3, 25, 27, 2, 4, '2017-09-08 02:22:09'),
-(3, 26, 26, 10, 2, '2017-09-08 16:44:02'),
-(4, 27, 14, 6, 2, '2017-09-08 03:14:23'),
-(2, 28, 14, 9, 1, '2017-09-08 13:26:02'),
-(3, 29, 39, 2, 4, '2017-09-08 05:47:03'),
-(3, 30, 44, 1, 2, '2017-09-08 05:23:34'),
-(3, 31, 43, 4, 2, '2017-09-08 02:56:02'),
-(2, 32, 5, 4, 1, '2017-09-08 16:32:32'),
-(3, 33, 41, 7, 2, '2017-09-08 10:38:07'),
-(4, 34, 43, 8, 4, '2017-09-08 14:51:37'),
-(3, 35, 33, 3, 2, '2017-09-08 02:19:27'),
-(2, 36, 37, 7, 4, '2017-09-08 11:16:57'),
-(4, 37, 38, 9, 4, '2017-09-08 03:46:40'),
-(3, 38, 32, 4, 4, '2017-09-08 14:22:56'),
-(2, 39, 33, 2, 4, '2017-09-08 07:51:32'),
-(2, 40, 47, 8, 3, '2017-09-08 08:21:30');
 
 -- --------------------------------------------------------
 
@@ -383,6 +383,13 @@ INSERT INTO `users` (`emailid`, `userid`, `password`, `username`, `autorization`
 --
 
 --
+-- Indexes for table `allorders`
+--
+ALTER TABLE `allorders`
+  ADD PRIMARY KEY (`orderid`,`userid`),
+  ADD KEY `userid` (`userid`);
+
+--
 -- Indexes for table `currentorder`
 --
 ALTER TABLE `currentorder`
@@ -417,13 +424,6 @@ ALTER TABLE `items`
   ADD KEY `item_id` (`item_id`);
 
 --
--- Indexes for table `order`
---
-ALTER TABLE `order`
-  ADD PRIMARY KEY (`orderid`,`userid`),
-  ADD KEY `userid` (`userid`);
-
---
 -- Indexes for table `orderlog`
 --
 ALTER TABLE `orderlog`
@@ -449,6 +449,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `allorders`
+--
+ALTER TABLE `allorders`
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=226;
+--
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
@@ -468,11 +473,17 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `allorders`
+--
+ALTER TABLE `allorders`
+  ADD CONSTRAINT `allorders_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
+
+--
 -- Constraints for table `currentorder`
 --
 ALTER TABLE `currentorder`
   ADD CONSTRAINT `currentorder_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`),
-  ADD CONSTRAINT `order_mapping` FOREIGN KEY (`order_id`) REFERENCES `order` (`orderid`);
+  ADD CONSTRAINT `order_mapping` FOREIGN KEY (`order_id`) REFERENCES `allorders` (`orderid`);
 
 --
 -- Constraints for table `feedback`
@@ -488,16 +499,10 @@ ALTER TABLE `ingredients_required`
   ADD CONSTRAINT `Relational_mapping2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
 
 --
--- Constraints for table `order`
---
-ALTER TABLE `order`
-  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
-
---
 -- Constraints for table `orderlog`
 --
 ALTER TABLE `orderlog`
-  ADD CONSTRAINT `orderlog_ibfk_2` FOREIGN KEY (`orderid`) REFERENCES `order` (`orderid`);
+  ADD CONSTRAINT `order_mapping2` FOREIGN KEY (`orderid`) REFERENCES `allorders` (`orderid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

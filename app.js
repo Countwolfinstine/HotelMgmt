@@ -143,35 +143,51 @@ app.get("/get-menu/:userId",function(req,res) {
 //make orderid as auto increment
 
 app.post("/submit-order/",function(req,res){
-  //console.log(req['body']);
-  //console.log(req['body'].length);
-  for (var i in req['body']) {
-      
-      if(!(i=="table_no" || i=="submit") ){
-        console.log(typeof(i))
+    //console.log(req['body']);
+    //console.log(req['body'].length);
+    for (var i in req['body']) {
+      //console.log(i);
+
+      if(!(i=="table_no" || i=="submit" || i=="user_id") ){
+        //console.log(typeof(i))
         if(req['body'][i]!=0 ){
-            console.log(req['body'][i]);
+            console.log(i)
+        var j = parseInt(i);
+        console.log(j); 
+        
+            //console.log(req['body'][i]);
             //INSERT INTO `restaurantmanagement`.`order` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES ('3', '13', '3', '3', '2', CURRENT_TIMESTAMP);
-            con.query("INSERT INTO order(tableid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ userId +","+ i +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
+            console.log("INSERT INTO allorders(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);");
+            con.query("INSERT INTO allorders(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
                 if(err1) throw err1;
-                res.send(result1);
-                //INSERT INTO `restaurantmanagement`.`orderlog` (`orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES ('5', '4', '2', '4', CURRENT_TIMESTAMP);
-                con.query("INSERT INTO orderlog(userid, itemid, quantity, time) VALUES ("+ userid +","+ i +","+ req['body'][i] +","+ "CURRENT_TIMESTAMP);", function(err2,result2,fields2){
-                    if(err2) throw err2;
-                    res.send(result2);
-                    //INSERT INTO `restaurantmanagement`.`currentorder` (`order_id`, `item_id`) VALUES ('3', '3');
-                    con.query("INSERT INTO orderlog(itemid) VALUES ("+i+");",function(err3,result3,fields3){
-                        if(err3) throw err3;
-                        res.send(result3);
+                console.log("SELECT * FROM allorders WHERE orderid = " + result1.insertId )
+                con.query("SELECT * FROM allorders WHERE orderid = " + result1.insertId , function(err5,result5,fields5){
+                     if(err5) throw err5;      
+                     console.log("select works")  
+                     console.log(result5[0].itemid)
+                    con.query("INSERT INTO orderlog(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
+                        if(err2) throw err2;
+                        //res.send(result2);
+                        //INSERT INTO `restaurantmanagement`.`currentorder` (`order_id`, `item_id`) VALUES ('3', '3');
+                        console.log("orderlog");
+                       
+                        
                     });
-                });
-                //update ingredient quantity with item ingredient-mapping 
-                //con.query("")
-                
-            });
+                    console.log("INSERT INTO currentorder(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
+                    con.query("INSERT INTO currentorder(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
+                        if(err3) throw err3;
+                        console.log("currentorder");
+                        //res.send(result3);
+                    });                    
+                 });    
+             });
         }
-      }
+    }
   }
+  res.send(200);    
+});
+
+app.get("/check/:userId/:tableNo",function(req,res){
 
 });
 
