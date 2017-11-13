@@ -31,8 +31,9 @@ app.use(cors());
 
 con.connect();
 app.get("/queue-api",function(req,res){
-    con.query("SELECT * FROM current_orders", function (err, result, fields) {
+    con.query("SELECT * FROM  current_orders INNER JOIN items ON (current_orders.item_id = items.item_id)" , function (err, result, fields) {
         if (err) throw err;
+        console.log(result)
         res.send(result);
     });
 });
@@ -42,11 +43,12 @@ app.post("/queue-api", function(req, res){
 });
 
 app.delete("/queue-api/:term", function(req,res){
-    console.log("gg");
-    con.query("SELECT * FROM current_orders", function (err, result, fields) {
+    con.query("DELETE FROM current_orders WHERE order_id = " + req.params.term  , function (err, result, fields) {
+        console.log("gg");
         if (err) throw err;
-        res.send(result);
+        console.log(result)
     });
+    res.send(200);
 });
 
 app.get("/manager-api/update-ingredient/:ingredientName/:ingredientQuantity", function(req,res){
@@ -111,7 +113,22 @@ app.post("/login-api", function(req,res){
 });
 
 app.get("/menu-display/:usserid",function(req,res){    
-    // var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'json'});    
+    var shell = new PythonShell('/RecommenderSystem/src/Recommender.py', { mode: 'text'});    
+    shell.send(req.params.usserid)
+    //received a message sent from the Python script (a simple "print" statement)
+    shell.on('message', function (message) {
+        console.log(typeof(message))
+        message = message.replace('[','');
+        message = message.replace(']','');
+        message = message.split(",");
+        console.log(message);
+        console.log(typeof(message))
+        for(i in message)
+        {
+            console.log(parseInt(i));
+        }
+    });
+
     // con.query("SELECT * from current_orders", function(err,results,fields){
     //     console.log(results);
     //     if(err) throw err;
@@ -126,7 +143,11 @@ app.get("/menu-display/:usserid",function(req,res){
     //         console.log('finished');
     //     });
     // });
+    
+
+
     con.query("SELECT * FROM items", function (err, result, fields) {
+    
         if (err) throw err;
         res.send(result);
     });
@@ -208,6 +229,25 @@ app.post("/submit-order/",function(req,res){
                     });                    
                  });    
              });
+             con.query("SELECT ingredients_required.item_id, ingredients_required.ing_id, ingredients_required.ing_quantity_required, ingredients.quantity FROM (ingredients INNER JOIN  ingredients_required ON ingredients.ing_id = ingredients_required.ing_id) WHERE ingredients_required.item_id="+i,function(err1,result1,fields1){
+                console.log(result1);
+                console.log(result1[0]['item_id']);
+
+                    
+                for (var x in result1) {
+                    var c = result1[x]['item_id']
+                    
+                    var amt = parseInt(result1[x]['quantity']) - req['body'][c] * parseInt(result1[x]['ing_quantity_required']); 
+                    console.log(amt);
+                    
+                    console.log("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id']);
+                    con.query("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id'], function(err2,result2,fields2){
+                        if (err2) throw err2;
+                        console.log(result2);
+                    });
+                         
+                }
+            })
         }
     }
   }

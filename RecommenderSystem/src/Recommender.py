@@ -110,10 +110,9 @@ def user_reommendations(person):
     return recommendataions_list
 
 def main():
-    uid = 4    
+    uid = int(input())   
     take_input()
     recommendation_list = user_reommendations(uid)
-    print(recommendation_list)
-
+    print(json.dumps(recommendation_list))
 if __name__ == "__main__":
     main()
