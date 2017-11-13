@@ -140,6 +140,15 @@ app.post("/waiter-input",function(req,res){
 });
 
 
+app.get("/check2/:userId/:tableNo",function(req,res){
+    console.log("SELECT order_billing.itemid, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo);
+    con.query("SELECT itemid, item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err,result,fields){
+        console.log(result[0]['itemid']);
+        console.log(result[0]['quantity']);
+        res.send(result);
+        
+    });
+});
 
 
 app.get("/check/:userId/:tableNo",function(req,res){
@@ -189,11 +198,7 @@ app.post("/submit-order/",function(req,res){
                      console.log(result5[0].itemid)
                     con.query("INSERT INTO orders_log(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
                         if(err2) throw err2;
-                        //res.send(result2);
-                        //INSERT INTO `restaurantmanagement`.`current_orders` (`order_id`, `item_id`) VALUES ('3', '3');
-                        console.log("orders_log");
-                       
-                        
+                        console.log("orders_log");      
                     });
                     console.log("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
                     con.query("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
@@ -211,6 +216,33 @@ app.post("/submit-order/",function(req,res){
 
 app.get("/check/:userId/:tableNo",function(req,res){
 
+});
+
+app.get("/billing-api/:userid/:tableid",function(req,res){
+    console.log("DELETE FROM order_billing WHERE tableid = " + req.params.tableid+" AND  userid = " + req.params.userid);
+    con.query("DELETE FROM order_billing WHERE tableid = " + req.params.tableid+" AND  userid = " + req.params.userid, function(err,result,fields){
+            res.send(result);
+    });
+});
+
+// app.get("/get-rating/:userId",function(req,res){
+//     console.log("get-rating");
+//     con.query("SELECT * FROM orders_billing WHERE userid =  "+ req.params.userId )
+
+// });
+app.post("/submit-rating/",function(req,res){
+    console.log(req['body'])
+    for (var i in req['body']) {
+        if(!(i=="table_no" || i=="submit" || i=="user_id")){
+            if (req['body'][i]!=0){
+                console
+                con.query("INSERT INTO rating (userid, item_id, rating) VALUES ( "+ req['body']["user_id"] +"," + i + ", "+req['body'][i] +") ", function(err,result,fields){
+                if (err) throw err;
+                });
+            }
+        }
+    }
+    res.send(200);
 });
 
 app.listen(3000);

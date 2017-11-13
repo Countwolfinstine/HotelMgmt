@@ -1,17 +1,48 @@
 from math import sqrt
 import pandas as pd
 import csv
+import json
+import pymysql
+from operator import itemgetter
 
-f = open('data1.csv')
-reader = csv.DictReader(f,delimiter=',')
+# f = open('data1.csv')
+# reader = csv.DictReader(f,delimiter=',')
+# dataset = {}
+# print(reader)
+# for line in reader:
+#     print(line)
+#     if(line['userid'] not in dataset):
+#         dataset[line['userid']] = {}
+
+#     dataset[line['userid']][line['itemid']] = float(line['rating'])
+
 dataset = {}
-print(reader)
-for line in reader:
-    print(line)
-    if(line['userid'] not in dataset):
-        dataset[line['userid']] = {}
 
-    dataset[line['userid']][line['itemid']] = float(line['rating'])
+def doQuery( conn, tableName ) :
+    cur = conn.cursor()
+    table_lower_case = tableName.lower()
+    qry="SELECT * FROM " + table_lower_case
+    cur.execute(qry)
+    for a in cur.fetchall():
+        # uid = a[0] ; iid = a[1] ; rating = a[2]
+        if a[0] not in dataset:
+            dataset[a[0]] = {}
+        dataset[a[0]][a[1]] = float(a[2])
+
+def take_input():
+    hostname = 'localhost'
+    username = 'root'
+    password = ''
+    database = 'restaurantmanagement'
+
+    table_name = "rating"
+    myConnection = pymysql.connect( host=hostname, user=username, passwd=password, db=database )
+    doQuery( myConnection,table_name )
+    myConnection.close()
+
+    # z=pd.DataFrame(rows, columns=["Itemname", "ordernumber", "date", "time","location"])
+    #print(rows[0])
+
 
 def pearson_correlation(person1,person2):
     # To get both rated items
@@ -78,4 +109,11 @@ def user_reommendations(person):
     recommendataions_list = [recommend_item for score,recommend_item in rankings]
     return recommendataions_list
 
-print(user_reommendations('2'))
+def main():
+    uid = 4    
+    take_input()
+    recommendation_list = user_reommendations(uid)
+    print(recommendation_list)
+
+if __name__ == "__main__":
+    main()

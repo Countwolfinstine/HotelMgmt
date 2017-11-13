@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<body>
+<form action="/submit-rating/" target="du" >
+	<p><b>Enter user id</b></p>	
+	<input type="number" id="user_id" name="user_id" placeholder="user_id">
+	<input type="button" id="btn_user_id" name="btn_user_id">
+
+
+	<p><b>Enetr table no.</b></p>
+	<select id="table_no" name="table_no">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+	</select>
+	<table id="menu_items">
+		<tr>
+			<th>Item Name</th>
+			
+			<th>Rating</th>
+		</tr>
+		
+	</table>
+	<input type="submit" name="submit" value="Submit" formmethod="post">
+</form>
+<iframe src="" id = "du" width = 0px height=0px></iframe>
+</body>
+<script type="text/javascript">
+	// $(document).ready(function(){
+	// 	alert("/check/"+$('#user_id').val() +"/"+$('#table_no').val() );
+		
+	// });
+	$("#btn_user_id").click(function(){
+		$.getJSON("/check2/"+$('#user_id').val() +"/"+$('#table_no').val(),displayFood);	
+	});
+	
+
+
+	function displayFood(terms){
+		$.each(terms,function(index,term){
+			$("#menu_items").append("<tr>"+
+			"<td>"+term['item_name']+"</td>"+
+			"<td><input type=\"number\" name=\""+term['itemid']+"\" value=\"0\"></td>"+
+			"</tr>");
+		});
+	}
+
+
+</script>
+
+</html>
