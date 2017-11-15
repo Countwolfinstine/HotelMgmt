@@ -1,0 +1,196 @@
+@import 'https://fonts.googleapis.com/css?family=Rubik+One';
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:700|Raleway:300');
+#holder
+{
+	position: fixed;
+	top:00px;
+	background-color: #f2f4f7;
+	width: 100%;
+	left: 0px;
+	height: 200px;
+	opacity: 0.2;
+	z-index: 3;
+
+}
+
+#Jumbo1
+{
+	margin-bottom: 0px;
+	height: 80%;
+	background:url(../images/mainback.jpg);
+	position: relative;
+	padding-top: 200px;
+	background-size: cover;
+	color: white;
+}
+#ov1
+{
+	position:absolute; bottom:7px;
+}
+html{
+	height:100%;
+}
+#pl{
+	border-radius: 50%;
+	float:right;
+	width: 25px;
+    height: 25px;
+}
+.heading {
+    letter-spacing: 7px;
+    font-family: 'Rajdhani', Arial;
+    font-family: 'Rajdhani', Arial;	
+		text-transform: uppercase;
+		font-size: 20px;
+}
+
+.container {
+            margin-top: 50px;
+            box-shadow: 0 0 10px 10px ; 
+        }
+
+input:focus 
+{
+    background-color: #F5F5DC;
+}
+input
+{
+	margin-left: 10px;
+}
+
+body
+{
+	font-family: 'Raleway';
+	font-weight:300;
+	height: 100%;
+	
+}
+
+div#container
+{
+	color: white;
+	position: absolute;
+	top: 200px;
+	left: 100px;
+	width: 90%;
+	font-size: 25px;
+	background-color:
+
+}
+
+#item
+{
+	border: 3px solid blue;
+	width:950px;
+	margin:auto;
+	border: 1px solid #73AD21;
+}
+
+h4{
+	position:relative;
+	left:500px;
+}
+#nav
+{
+	display: inline;
+	position: absolute;	
+	right : 30px;
+	top: 100px;
+}
+a.bmenu
+{
+	text-decoration: none;
+	color: white;
+	position: absolute;
+	top: 50px;
+	transition: font-size 1s, font-color 1s;
+
+}
+
+a.bmenu:hover
+{
+	color: lightgrey;
+	font-size: 25px;
+
+}
+#d2
+{
+	position: fixed;
+	top:0px;
+	font-family: Felix Titling;
+	font-size:20px;
+	width: 100%;
+	left: 0px;
+	height: 200px;
+	z-index: 3;
+
+}
+#nav1,#nav2,#nav3,#nav4,#nav5
+{
+	text-decoration: none;
+	display: inline;
+	padding: 90px;
+
+}
+#btn {
+    background-color: green;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+	position: relative;
+	left:1110px;
+	
+	
+}
+
+.invbut
+{
+	width: 60px;
+	background-color: #cc6600;
+
+}
+
+.subd1,.subd2,.subd3,.subd4,.subd5
+{
+	position: relative;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	display: none;
+
+}
+
+table 
+{
+    font-family: Raleway;
+    border-collapse: collapse;
+    width: 100%;
+     border: 2px solid #c3c3c3;
+    border-radius: 12px;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+.table tbody tr:hover td, .table tbody tr:hover th 
+{
+    background-color: #cc6600;
+}
+
+a
+{
+	text-decoration: none;
+	color: white;
+}
+
+a:hover
+{
+	text-decoration: none;
+	color:#cc6600;
+}
+
+
