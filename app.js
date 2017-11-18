@@ -9,12 +9,12 @@ var mysql = require('mysql');
 var app = express();
 
 var con = mysql.createConnection({
-  host: "35.200.142.142",
+  host: "localhost",
   user: "root",
-  password: "root",
-  database: "restaurantmanagement"
+  password: "",
+  database: "Restaurantmanagement"
 });
-//con.connect();
+con.connect();
 
 
 app.use(session({secret: 'randomsecret'}))
@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 app.use(function(req,res,next){
-    //console.log(`${req.method} request for '${req.url}' - $(JSON.stringify(req.body)}`);
+    console.log(`${req.method} request for '${req.url}' - $(JSON.stringify(req.body)}`);
     next();
 });
 
