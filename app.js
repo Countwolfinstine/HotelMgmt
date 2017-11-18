@@ -14,7 +14,7 @@ var con = mysql.createConnection({
   password: "root",
   database: "restaurantmanagement"
 });
-con.connect();
+//con.connect();
 
 
 app.use(session({secret: 'randomsecret'}))
