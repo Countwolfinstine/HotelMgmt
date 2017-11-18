@@ -1,35 +1,57 @@
 var PythonShell = require('python-shell');
 var express = require("express");
 var bodyParser = require("body-parser")
+var session = require("express-session")
 var cors = require("cors");
 var path = require("path");
+var mysql = require('mysql');
+
 var app = express();
 
-var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "",
   database: "RestaurantManagement"
 });
+con.connect();
 
+
+app.use(session({secret: 'randomsecret'}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
+app.use(function(req,res,next){
+    console.log(`${req.method} request for '${req.url}' - $(JSON.stringify(req.body)}`);
+    next();
+});
 
 var options = {
     mode: 'json',
 };
 
-app.use(function(req,res,next){
-	console.log(`${req.method} request for '${req.url}' - $(JSON.stringify(req.body)}`);
-	next();
+var sess;
+
+app.get("/",function(req,res){
+    sess = req.session;
+    console.log(sess.email + sess.auth)
+    if(sess.email) {
+
+        if(sess.auth == "Customer")
+            res.redirect('/index.html')
+        else if(sess.auth == "Manager")
+            res.redirect('/manager.html')
+        else if(sess.auth == "Waiter")
+            res.redirect('/waiter2.html')
+    }
+    else {
+        console.log("ff")
+        res.redirect("/login.html")
+    }
 });
 
 app.use(express.static("./"))
 
-app.use(cors());
-
-con.connect();
 app.get("/queue-api",function(req,res){
     con.query("SELECT * FROM  current_orders INNER JOIN items ON (current_orders.item_id = items.item_id)" , function (err, result, fields) {
         if (err) throw err;
@@ -69,8 +91,8 @@ app.get("/manager-api/add-ingredient/:ingredientName/:ingredientQuantity", funct
 
 app.get("/manager-api/add-food/:foodname/:cost", function(req,res){
    con.query("INSERT INTO items (item_name, item_id, price) VALUES ( \""  + req.params.foodname + "\", NULL, " + req.params.cost + ");", function(err, result, fields){
-         if (err) throw err;
-         res.send(result);
+        if (err) throw err;
+        res.send(result);
     });
 });
 
@@ -94,7 +116,6 @@ app.get("/manager-api/add-food-ingredient/:foodName/:ingredientName/:quantity", 
 });
 
 app.post("/signup-api",function(req,res){
-
     console.log(req.body.userName);
     con.query("INSERT INTO users (emailid, userid, password, username, autorization) VALUES (\"" + req.body.email + "\", NULL, +\"" + req.body.password + "\",\"" + req.body.username + "\", \" Customer\" );", function(err,result,fields){
         if(err) throw err;
@@ -106,9 +127,20 @@ app.post("/signup-api",function(req,res){
 
 app.post("/login-api", function(req,res){
     console.log("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY userid ASC")
+    sess = req.session;
+
     con.query("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY `userid` ASC", function(err,result,fields){
-        console.log(result.length)
-        res.send(result)
+        if(result.length > 0) {
+            sess.email = req.body.email;
+            
+            sess.auth = result[0].autorization 
+            console.log("login " + sess.email + " " + sess.auth)
+            res.send(result)
+        }
+        else{
+            res.send(result)
+        }
+
     });
 });
 
@@ -144,8 +176,6 @@ app.get("/menu-display/:usserid",function(req,res){
     //     });
     // });
     
-
-
     con.query("SELECT * FROM items", function (err, result, fields) {
     
         if (err) throw err;
@@ -154,10 +184,6 @@ app.get("/menu-display/:usserid",function(req,res){
 });
 
 app.post("/waiter-input",function(req,res){
-
-
-
-
 });
 
 
@@ -167,7 +193,6 @@ app.get("/check2/:userId/:tableNo",function(req,res){
         console.log(result[0]['itemid']);
         console.log(result[0]['quantity']);
         res.send(result);
-        
     });
 });
 
@@ -178,7 +203,6 @@ app.get("/check/:userId/:tableNo",function(req,res){
         console.log(result[0]['itemid']);
         console.log(result[0]['quantity']);
         res.send(result);
-        
     });
 });
 
@@ -195,63 +219,55 @@ app.get("/get-menu/:userId",function(req,res) {
 //make orderid as auto increment
 
 app.post("/submit-order/",function(req,res){
-    //console.log(req['body']);
-    //console.log(req['body'].length);
     for (var i in req['body']) {
-      //console.log(i);
-
-      if(!(i=="table_no" || i=="submit" || i=="user_id") ){
-        //console.log(typeof(i))
-        if(req['body'][i]!=0 ){
-            console.log(i)
-        var j = parseInt(i);
-        console.log(j); 
-        
-            //console.log(req['body'][i]);
-            //INSERT INTO `restaurantmanagement`.`order` (`tableid`, `orderid`, `userid`, `itemid`, `quantity`, `time`) VALUES ('3', '13', '3', '3', '2', CURRENT_TIMESTAMP);
-            console.log("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);");
-            con.query("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
-                if(err1) throw err1;
-                console.log("SELECT * FROM order_billing WHERE orderid = " + result1.insertId )
-                con.query("SELECT * FROM order_billing WHERE orderid = " + result1.insertId , function(err5,result5,fields5){
-                     if(err5) throw err5;      
-                     console.log("select works")  
-                     console.log(result5[0].itemid)
-                    con.query("INSERT INTO orders_log(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
-                        if(err2) throw err2;
-                        console.log("orders_log");      
-                    });
-                    console.log("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
-                    con.query("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
-                        if(err3) throw err3;
-                        console.log("current_orders");
-                        //res.send(result3);
-                    });                    
-                 });    
-             });
-             con.query("SELECT ingredients_required.item_id, ingredients_required.ing_id, ingredients_required.ing_quantity_required, ingredients.quantity FROM (ingredients INNER JOIN  ingredients_required ON ingredients.ing_id = ingredients_required.ing_id) WHERE ingredients_required.item_id="+i,function(err1,result1,fields1){
-                console.log(result1);
-                console.log(result1[0]['item_id']);
-
-                    
-                for (var x in result1) {
-                    var c = result1[x]['item_id']
-                    
-                    var amt = parseInt(result1[x]['quantity']) - req['body'][c] * parseInt(result1[x]['ing_quantity_required']); 
-                    console.log(amt);
-                    
-                    console.log("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id']);
-                    con.query("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id'], function(err2,result2,fields2){
-                        if (err2) throw err2;
-                        console.log(result2);
-                    });
-                         
-                }
-            })
+        if(!(i=="table_no" || i=="submit" || i=="user_id") ){
+            //console.log(typeof(i))
+            if(req['body'][i]!=0 ){
+                console.log(i)
+                var j = parseInt(i);
+                console.log(j); 
+                console.log("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);");
+                con.query("INSERT INTO order_billing(tableid, orderid, userid, itemid, quantity, time) VALUES (" + req['body']["table_no"] +","+ "NULL" +","+ req['body']['user_id'] +","+ j +","+ req['body'][i] +"," + "CURRENT_TIMESTAMP);" ,function(err1,result1,fields1){
+                    if(err1) throw err1;
+                    console.log("SELECT * FROM order_billing WHERE orderid = " + result1.insertId )
+                    con.query("SELECT * FROM order_billing WHERE orderid = " + result1.insertId , function(err5,result5,fields5){
+                         if(err5) throw err5;      
+                         console.log("select works")  
+                         console.log(result5[0].itemid)
+                        con.query("INSERT INTO orders_log(orderid, userid, itemid, quantity, time) VALUES ('"+ result1.insertId +"','"+ req['body']['user_id'] +"','"+ result5[0].itemid +"','"+ req['body'][i] +"', CURRENT_TIMESTAMP);", function(err2,result2,fields2){
+                            if(err2) throw err2;
+                            console.log("orders_log");      
+                        });
+                        console.log("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');");
+                        con.query("INSERT INTO current_orders(order_id, item_id) VALUES ('"+ result1.insertId +"','"+result5[0].itemid+"');",function(err3,result3,fields3){
+                            if(err3) throw err3;
+                            console.log("current_orders");
+                            //res.send(result3);
+                        });                    
+                     });    
+                });
+                con.query("SELECT ingredients_required.item_id, ingredients_required.ing_id, ingredients_required.ing_quantity_required, ingredients.quantity FROM (ingredients INNER JOIN  ingredients_required ON ingredients.ing_id = ingredients_required.ing_id) WHERE ingredients_required.item_id="+i,function(err1,result1,fields1){
+                    console.log(result1);
+                    console.log(result1[0]['item_id']);
+                        
+                    for (var x in result1) {
+                        var c = result1[x]['item_id']
+                        
+                        var amt = parseInt(result1[x]['quantity']) - req['body'][c] * parseInt(result1[x]['ing_quantity_required']); 
+                        console.log(amt);
+                        
+                        console.log("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id']);
+                        con.query("UPDATE ingredients SET quantity = "+ amt + " WHERE ing_id="+result1[x]['ing_id'], function(err2,result2,fields2){
+                            if (err2) throw err2;
+                            console.log(result2);
+                        });
+                                 
+                    }
+                })
+            }
         }
     }
-  }
-  res.send(200);    
+res.send(200);    
 });
 
 app.get("/check/:userId/:tableNo",function(req,res){
@@ -261,7 +277,7 @@ app.get("/check/:userId/:tableNo",function(req,res){
 app.get("/billing-api/:userid/:tableid",function(req,res){
     console.log("DELETE FROM order_billing WHERE tableid = " + req.params.tableid+" AND  userid = " + req.params.userid);
     con.query("DELETE FROM order_billing WHERE tableid = " + req.params.tableid+" AND  userid = " + req.params.userid, function(err,result,fields){
-            res.send(result);
+        res.send(result);
     });
 });
 
