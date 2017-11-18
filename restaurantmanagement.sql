@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.14
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2017 at 03:13 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
+-- Generation Time: Nov 18, 2017 at 05:53 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `current_orders`
 --
 
-CREATE TABLE IF NOT EXISTS `current_orders` (
+CREATE TABLE `current_orders` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `current_orders` (
 --
 
 INSERT INTO `current_orders` (`order_id`, `item_id`) VALUES
-(251, 1),
-(250, 4);
+(250, 4),
+(251, 1);
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,7 @@ INSERT INTO `current_orders` (`order_id`, `item_id`) VALUES
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE IF NOT EXISTS `feedback` (
+CREATE TABLE `feedback` (
   `userid` int(11) NOT NULL,
   `feedback` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -56,21 +56,41 @@ CREATE TABLE IF NOT EXISTS `feedback` (
 -- Table structure for table `ingredients`
 --
 
-CREATE TABLE IF NOT EXISTS `ingredients` (
+CREATE TABLE `ingredients` (
   `ing_id` int(11) NOT NULL,
   `ing_name` varchar(30) NOT NULL,
   `quantity` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ingredients`
 --
 
 INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
-(1, 'Batter ', 1000),
-(2, 'Butter ', 10),
-(4, 'Milk', 20),
-(6, 'choco', 500);
+(1, 'Dosa Batter', 50),
+(2, 'Potato', 100),
+(3, 'Curry Leaves', 50),
+(4, 'Tamrind', 20),
+(5, 'Tomato', 100),
+(6, 'Idli Batter', 40),
+(7, 'Onion', 44),
+(8, 'Rice', 95),
+(9, 'Garam Masala', 60),
+(10, 'Chilly Powder', 40),
+(11, 'Rajma', 43),
+(12, 'Urad Dal', 20),
+(13, 'Lentils', 37),
+(14, 'Turmeric', 45),
+(15, 'Toor Dal', 37),
+(16, 'Beans', 40),
+(17, 'Gobhi', 25),
+(18, 'Pav', 100),
+(19, 'Paalak', 50),
+(20, 'Paneer', 20),
+(21, 'Wheat', 50),
+(22, 'Capsicum', 30),
+(23, 'Noodles', 100),
+(24, 'Cheese', 50);
 
 -- --------------------------------------------------------
 
@@ -78,7 +98,7 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
 -- Table structure for table `ingredients_required`
 --
 
-CREATE TABLE IF NOT EXISTS `ingredients_required` (
+CREATE TABLE `ingredients_required` (
   `ing_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `ing_quantity_required` int(11) NOT NULL
@@ -90,7 +110,66 @@ CREATE TABLE IF NOT EXISTS `ingredients_required` (
 
 INSERT INTO `ingredients_required` (`ing_id`, `item_id`, `ing_quantity_required`) VALUES
 (1, 1, 5),
-(1, 17, 5);
+(1, 2, 2),
+(1, 3, 3),
+(1, 4, 1),
+(1, 5, 2),
+(2, 6, 5),
+(2, 4, 2),
+(2, 5, 2),
+(3, 6, 3),
+(3, 3, 2),
+(3, 7, 2),
+(4, 8, 6),
+(4, 9, 3),
+(4, 10, 1),
+(5, 11, 4),
+(5, 12, 2),
+(5, 9, 2),
+(6, 13, 5),
+(6, 9, 2),
+(6, 7, 3),
+(7, 14, 2),
+(7, 15, 2),
+(7, 5, 2),
+(7, 7, 2),
+(8, 16, 3),
+(8, 2, 2),
+(8, 5, 2),
+(9, 2, 4),
+(9, 17, 4),
+(9, 7, 3),
+(10, 18, 4),
+(10, 5, 2),
+(10, 2, 3),
+(11, 19, 6),
+(11, 20, 5),
+(11, 7, 3),
+(12, 8, 6),
+(12, 7, 3),
+(12, 5, 4),
+(13, 21, 5),
+(14, 21, 5),
+(14, 8, 6),
+(14, 8, 6),
+(14, 22, 3),
+(14, 7, 4),
+(15, 21, 5),
+(16, 8, 6),
+(16, 22, 2),
+(16, 7, 4),
+(17, 23, 10),
+(17, 22, 4),
+(17, 7, 3),
+(18, 24, 5),
+(18, 8, 6),
+(18, 7, 3),
+(19, 8, 6),
+(19, 7, 2),
+(19, 5, 3),
+(20, 24, 6),
+(20, 7, 3),
+(20, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -98,11 +177,11 @@ INSERT INTO `ingredients_required` (`ing_id`, `item_id`, `ing_quantity_required`
 -- Table structure for table `items`
 --
 
-CREATE TABLE IF NOT EXISTS `items` (
+CREATE TABLE `items` (
   `item_name` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -136,13 +215,13 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 -- Table structure for table `orders_log`
 --
 
-CREATE TABLE IF NOT EXISTS `orders_log` (
+CREATE TABLE `orders_log` (
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders_log`
@@ -395,14 +474,14 @@ INSERT INTO `orders_log` (`orderid`, `userid`, `itemid`, `quantity`, `time`) VAL
 -- Table structure for table `order_billing`
 --
 
-CREATE TABLE IF NOT EXISTS `order_billing` (
+CREATE TABLE `order_billing` (
   `tableid` int(11) NOT NULL,
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_billing`
@@ -420,7 +499,7 @@ INSERT INTO `order_billing` (`tableid`, `orderid`, `userid`, `itemid`, `quantity
 -- Table structure for table `rating`
 --
 
-CREATE TABLE IF NOT EXISTS `rating` (
+CREATE TABLE `rating` (
   `userid` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL
@@ -625,13 +704,13 @@ INSERT INTO `rating` (`userid`, `item_id`, `rating`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `emailid` varchar(40) NOT NULL,
   `userid` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `autorization` varchar(10) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -779,27 +858,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `orders_log`
 --
 ALTER TABLE `orders_log`
-  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=103;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- Constraints for dumped tables
 --
