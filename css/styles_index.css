@@ -27,9 +27,9 @@ body{
 {
 	margin-bottom: 0px;
 	height: 80%;
-	background:url(../images/EAbg.jpg);
 	position: relative;
 	padding-top: 200px;
+	background:url(../images/EAbg.jpg);
 	background-size: cover;
 	color: white;
 }

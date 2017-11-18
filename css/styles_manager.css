@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik+One');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:700|Raleway:300');
+
+
+input:focus 
+{
+    background-color: #F5F5DC;
+}
+input
+{
+	margin-left: 0px;
+}
+
+body
+{
+	background: url(../images/white.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+	font-family: 'Raleway';
+	font-weight: 300 ;
+	margin-top: 1000px : 
+
+}
+
+#inventory{
+	font-family: 'Rajdhani';
+}
+
+.nav{
+	font-family: :Ralway; 
+	font-size: 1.4em;
+}
+
+b{
+	cursor: pointer; 
+}
+
+div#container
+{
+	
+	position: absolute;
+	top: 200px;
+	left: 100px;
+	width: 90%;
+	font-size: 25px;
+
+}
+
+#item
+{
+	border: 3px solid blue;
+	width:950px;
+	margin:auto;
+	border: 1px solid #73AD21;
+}
+
+h4{
+	position:relative;
+	left:500px;
+}
+#nav
+{
+	display: inline;
+	position: absolute;	
+	right : 30px;
+	top: 100px;
+}
+a.bmenu
+{
+	text-decoration: none;
+	
+	position: absolute;
+	top: 50px;
+	transition: font-size 1s, font-color 1s;
+
+}
+
+a.bmenu:hover
+{
+
+	font-size: 25px;
+
+}
+#d2
+{
+	position: fixed;
+	top:0px;
+	font-family:Rajdhani;
+	font-size:20px;
+	width: 100%;
+	left: 0px;
+	height: 200px;
+	z-index: 3;
+
+}
+
+.form-control{
+	width: 50%;
+	margin-bottom: 10px;
+	margin-top: 10px;  
+}
+.btn{
+ margin-bottom:  8px;
+}
+
+.subd1,.subd2,.subd3,.subd4,.subd5
+{
+	position: relative;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	display: none;
+
+}
+
+table 
+{
+    font-family: Raleway;
+    border-collapse: collapse;
+    width: 60%;
+    border: 2px solid #c3c3c3;
+    border-radius: 3px;
+    border-spacing: 0px;
+    border-collapse: separate;
+}
+
+
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: none;
+	
+}
+
+

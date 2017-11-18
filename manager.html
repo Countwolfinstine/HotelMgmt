@@ -1,41 +1,38 @@
 <html>
 <head>
-	<link rel="stylesheet" type = "text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type = "text/css" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type = "text/css" href="css/styles_manager.css">
+		
+	<title>Admin page</title>
+
 </head>
-<title></title>
-<style>
 
-td, th 
-{
-
-	text-align: left;
-	padding: 8px;
-	color: white;
-}
-
-tr:nth-child(even) 
-{
-	background:transparent;
-
-}
-
-tr:nth-child(odd) 
-{
-	background:transparent;
-
-}
-
-body
-{
-	background-image: url("images/tback.jpeg");
-}
-
-</style>
 <body>
+
+	<nav class="navbar navbar-default navbar-fixed-top" id="navv">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+			</div>
+
+			<div class = "collapse navbar-collapse" id = "collapsemenu">
+				<ul class="nav navbar-nav navbar-right ">		
+					<li><a href="home.html">Home</a></li>
+					<li><a href="">Menu</a></li>
+					<li><a href="login.html">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div id = "container" class="container">
 		<div id="recommender_menu">
-			<p><b>Recommended Items to be prepared:</b></p>
+			<p>Recommended Items to be prepared </p>
 			<table id="recommender_menu_table" class="table table-hover">
 				<tr>
 					<th scope="row">Food Name</th>
@@ -58,8 +55,8 @@ body
 			</table>	
 		</div>
 		<br><br>
-		<div id="inventory">
-			<p><b> Inventory Items with quanities</b></p>
+
+		<p> Inventory Items with quanities</p>
 			<div id="inventory_details">
 				<table id="inventory_details_table" class="table table-hover">
 					<tr>
@@ -76,45 +73,49 @@ body
 					</tr>
 				</table>
 			</div>
+
+		<div id="inventory">	
 			<br><br>
-			<a onclick="shdiv()"><p><b>Update ingredient Quantity:</b></p></a>
+			<a onclick="shdiv()"><p><b>Update ingredient Quantity </b></p></a>
 			
 			<div id="inventory_update_quantity" class="subd1">
-				<input type="text" name="update_ingredient_name" id="update_ingredient_name" placeholder="update_ingredient_name"/>
-				<input type="number" name="update_ingredient_quantity" id="update_ingredient_quantity" placeholder="update_ingredient_quantity"/>
-				<input type="button" name="go" value="go" id="btn_inventory_update_quantity" class="invbut"/>
+				<input type="text" class = "form-control" name="update_ingredient_name" id="update_ingredient_name" placeholder="Ingredient Name"/>
+				<input type="number" class="form-control" name="update_ingredient_quantity" id="update_ingredient_quantity" placeholder="Quantity"/>
+				<input type="button" name="update" value="update" id="btn_inventory_update_quantity" class="invbut btn btn-default"/>
 			</div>
 			
-			<br><br>
-			<a onclick="shdiv2()"><p><b>Add new ingredient:</b></p></a>
+			
+			<a onclick="shdiv2()"><p><b>Add new ingredient </b></p></a>
 			<div id="inventory_add_new" class="subd2">
-				<input type="text" name="new_ingredient_name" id="new_ingredient_name" placeholder="new_ingredient_name"/>
-				<input type="number" name="new_ingredient_quantity" id="new_ingredient_quantity" placeholder="ingredient_quantity"/>
-				<input type="button" name="go" value="go" id="btn_inventory_add_new" class="invbut">
+				<input type="text" class = "form-control" name="new_ingredient_name" id="new_ingredient_name" placeholder="Ingredient Name"/>
+				<input type="number" class="form-control" name="new_ingredient_quantity" id="new_ingredient_quantity" placeholder="Quantity"/>
+				<input type="button" name="update" value="update" id="btn_inventory_add_new" class="invbut btn btn-default ">
 			</div>
-			<br><br>
-			<a onclick="shdiv3()"><p><b>Add new food item to menu:</b></p></a>
+			
+			<a onclick="shdiv3()"><p><b>Add new food item to menu </b></p></a>
 			<div id="food_add_new" class="subd3">
-				<input type="text" name="food_name" id="food_name" placeholder="ingredient_name"/>
-				<input type="number" name="cost" id="cost" placeholder="cost"/>
-				<input type="number" name="num_ingredients" id="num_ingredients" placeholder="total ingredients" max="10"/>
-				<input type="button" name="go" value="go" id="btn_food_add_new" class="invbut">
+				<input type="text" class = "form-control" name="food_name" id="food_name" placeholder="Food Name"/>
+				<input type="number" class="form-control" name="cost" id="cost" placeholder="Cost"/>
+				<input type="number" class="form-control" name="num_ingredients" id="num_ingredients" placeholder="Total Ingredients" max="10"/>
+				<input type="button" name="update" value="update" id="btn_food_add_new" class="invbut btn btn-default">
 			</div>
-			<br><br>
+			
 			<a onclick="shdiv4()"><p><b>Add ingredient and quantity to item</b></p></a>
 			<div id="food_ingredient_add" class="subd4">
-				<input type="text" name="food_ingredient_fname" id="food_ingredient_fname" placeholder="food_ingredient_fname">
-				<input type="text" name="food_ingredient_iname" id="food_ingredient_iname" placeholder="food_ingredient_iname">
-				<input type="number" name="food_ingredient_iquant" id="food_ingredient_iquant" placeholder="food_ingredient_iquant">
-				<input type="button" name="go" value="go" id="btn_food_ingredient_add" class="invbut">
+				<input type="text" class = "form-control" name="food_ingredient_fname" id="food_ingredient_fname" placeholder="Food Name">
+				<input type="text" class = "form-control" name="food_ingredient_iname" id="food_ingredient_iname" placeholder="Ingredient Name">
+				<input type="number" class="form-control" name="food_ingredient_iquant" id="food_ingredient_iquant" placeholder="Quantity">
+				<input type="button" name="update" value="update" id="btn_food_ingredient_add" class="invbut btn btn-default">
 			</div>
-			<br><br>
-			<a onclick="shdiv5()"><p><b>Enter start date, end date</b></p></a>
+			
+			<a onclick="shdiv5()"><p><b>Fetch recommendation</b></p></a>
 			<div id="food_sold" class="subd5">
-				<input type="date" name="start_date" id="start_date"/>
-				<input type="date" name="end_date" id="end_date"/>
-				<input type="button" name="go" value="go" id="btn_food_sold"/ class="invbut">
-				<br><br>
+				<label > Start date </label>
+				<input type="date" name="start_date" id="start_date" class="form-control" />
+				<label>End Date</label>
+				<input type="date" name="end_date" id="end_date" class="form-control"/>
+				<input type="button" name="go" value="fetch Data" id="btn_food_sold"/ class="invbut btn btn-default">
+				
 				<table id="table_food_sold" class="table table-hover">
 					<tr>
 						<th>Food Item</th>
