@@ -9,10 +9,10 @@ var mysql = require('mysql');
 var app = express();
 
 var con = mysql.createConnection({
-  host: "localhost",
+  host: "35.200.142.142",
   user: "root",
-  password: "",
-  database: "RestaurantManagement"
+  password: "root",
+  database: "restaurantmanagement"
 });
 con.connect();
 
