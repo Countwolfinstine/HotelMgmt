@@ -1,40 +1,82 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-
+<html>
 <head>
-    <style>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type = "text/css" href="css/styles_analytics.css">
+	<title>Analytics page</title>
+  <style>
 
-  .bar{
-    fill: steelblue;
+.bar{
+  fill: steelblue;
+}
+
+.bar:hover{
+  fill: brown;
+}
+
+#graph-div{
+	text-align: center;
+	margin-top: 8%;
+	background: #f5f5f5;
+	opacity: 0.9;
+padding-bottom: 10px;
+  line-height: 90px;
+	border-style: solid;
+    border-width: 2px;
+ }
+
+
+  .axis {
+    font: 10px sans-serif;
+  }
+  .navbar {
+      margin-bottom: 10px;
+}
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
   }
 
-  .bar:hover{
-    fill: brown;
-  }
+  </style>
 
-    .axis {
-      font: 10px sans-serif;
-    }
-
-    .axis path,
-    .axis line {
-      fill: none;
-      stroke: #000;
-      shape-rendering: crispEdges;
-    }
-
-    </style>
 </head>
 
 <body>
-    
+	<script src="js/d3.v3.min.js"></script>
+	<nav class="navbar navbar-default navbar-fixed-top" id="navv">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+			</div>
+
+			<div class = "collapse navbar-collapse" id = "collapsemenu">
+				<ul class="nav navbar-nav navbar-right ">
+					<li><a href="home.html">Home</a></li>
+					<li><a href="">Aanalytics</a></li>
+
+					<li><a href="login.html">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div id = "graph-div" class="container">
+		<h1>Average Item Rating</h1>
+	</div>
+
 <script src="http://d3js.org/d3.v3.min.js"></script>
 
 <script>
 // set the dimensions of the canvas
-var margin = {top: 20, right: 20, bottom: 70, left: 40},
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+var margin = {top: 20, right: 20, bottom: 100, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 520 - margin.top - margin.bottom;
 
 
 // set the ranges
@@ -55,11 +97,11 @@ var yAxis = d3.svg.axis()
 
 
 // add the SVG element
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#graph-div").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", 
+    .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 
 
@@ -70,7 +112,7 @@ d3.json("analytics-api", function(error, data) {
         d.item_name = d.item_name;
         d.cs = +d.cs;
     });
-    
+
   // scale the range of the data
   x.domain(data.map(function(d) { return d.item_name; }));
   y.domain([0, d3.max(data, function(d) { return d.c; })]);
@@ -112,3 +154,4 @@ d3.json("analytics-api", function(error, data) {
 </script>
 
 </body>
+</html>

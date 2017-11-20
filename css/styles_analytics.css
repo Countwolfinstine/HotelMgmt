@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:700|Raleway:300');
 
 
-input:focus 
+input:focus
 {
     background-color: #F5F5DC;
 }
@@ -13,14 +13,14 @@ input
 
 body
 {
-	background: url(../images/white.jpg) no-repeat center center fixed; 
+	background: url(../images/white.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 	font-family: 'Raleway';
 	font-weight: 300 ;
-	margin-top: 1000px : 
+
 
 }
 
@@ -37,7 +37,7 @@ h1{
 	text-align: center;
 	margin-top: 8%;
 	background: #f5f5f5;
-	opacity: 0.9; 
+	opacity: 0.9;
 	line-height: 90px;
 	border-style: solid;
     border-width: 2px;
@@ -49,7 +49,7 @@ h1{
 }
 
 .nav{
-	font-family: :Ralway; 
+	font-family: :Ralway;
 	font-size: 1.4em;
 }
 
@@ -58,12 +58,12 @@ td{
 }
 
 b{
-	cursor: pointer; 
+	cursor: pointer;
 }
 
 div#container
 {
-	
+
 	position: absolute;
 	top: 200px;
 	left: 100px;
@@ -87,14 +87,14 @@ h4{
 #nav
 {
 	display: inline;
-	position: absolute;	
+	position: absolute;
 	right : 30px;
 	top: 100px;
 }
 a.bmenu
 {
 	text-decoration: none;
-	
+
 	position: absolute;
 	top: 50px;
 	transition: font-size 1s, font-color 1s;
@@ -123,7 +123,7 @@ a.bmenu:hover
 .form-control{
 	width: 50%;
 	margin-bottom: 10px;
-	margin-top: 10px;  
+	margin-top: 10px;
 }
 .btn{
  margin-bottom:  8px;
@@ -138,7 +138,7 @@ a.bmenu:hover
 
 }
 
-table 
+table
 {
     font-family: Raleway;
     border-collapse: collapse;
@@ -158,7 +158,7 @@ a
 a:hover
 {
 	text-decoration: none;
-	
+
 }
 
 
@@ -187,5 +187,3 @@ a:hover
 .x.axis path {
   display: none;
 }
-
-

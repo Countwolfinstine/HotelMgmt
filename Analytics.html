@@ -1,12 +1,12 @@
 <html>
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" type = "text/css" href="css/styles_analytics.css">		
+		<link rel="stylesheet" type = "text/css" href="css/styles_analytics.css">
 	<title>Analytics page</title>
 </head>
 
 <body>
-	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/d3.v3.min.js"></script>
 	<nav class="navbar navbar-default navbar-fixed-top" id="navv">
 		<div class="container">
 			<div class="navbar-header">
@@ -19,7 +19,7 @@
 			</div>
 
 			<div class = "collapse navbar-collapse" id = "collapsemenu">
-				<ul class="nav navbar-nav navbar-right ">		
+				<ul class="nav navbar-nav navbar-right ">
 					<li><a href="home.html">Home</a></li>
 					<li><a href="">Aanalytics</a></li>
 					<li><a href="login.html">Logout</a></li>
@@ -29,7 +29,7 @@
 	</nav>
 	<div id = "graph-div" class="container">
 		<h1>Sales Per day </h1>
-		
+
 	</div>
 <script>
 // Mike Bostock "margin conventions"
@@ -105,7 +105,7 @@ function replay(data) {
   var slices = [];
   for (var i = 0; i < data.length; i++) {
     slices.push(data.slice(0, i+1));
-    
+
   }
   slices.forEach(function(slice, index){
     setTimeout(function(){
@@ -117,7 +117,7 @@ function replay(data) {
 function draw(data) {
   // measure the domain (for x, unique date1s) (for y [0,maxc])
   // now the scales are finished and usable
-  x.domain(data.map(function(d) { 
+  x.domain(data.map(function(d) {
     var temp = d.date1.split('T');
     return d.date1; }));
   y.domain([0, d3.max(data, function(d) { return d.close; })]);
