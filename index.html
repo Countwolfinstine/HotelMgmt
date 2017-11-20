@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles_index.css">
-  <title>How it works</title>
+  <title>Generic Hotel</title>
 </head>
 <body>
 
@@ -22,11 +22,9 @@
 		</div>
 
 		<div class = "collapse navbar-collapse" id = "collapsemenu">
-			<ul class="nav navbar-nav navbar-right ">		
-				<li><a href="home.html">Home</a></li>
-				<li><a href="">Menu</a></li>
-				<li><a href="cookq.html">Location</a></li>
-				<li><a href="login.html">Login</a></li>
+			<ul class="nav navbar-nav navbar-right ">
+				<li><a href="#">Home</a></li>
+				<li><a id="logout">Logout</a></li>
 			</ul>
 		</div>
 	</div>
@@ -38,12 +36,12 @@
 			<h1 class="heading"><b>The generic Hotel</b></h2>
 			<h2 id="paddtohell" class="heading"> </h2>
 			<div id="ov1" class="container">
-				<span class = "option" id="ov">Get Started</span> <span  class = "option" id="st">Platform</span> <span class = "option" id="ap">Location</span>
+				<span class = "option" id="ov">About</span> <span  class = "option" id="st">Menu</span>
 			</div>
 		</div>
 	</div>
 </div>
-	
+
 <div class="jumbotron" id="Jumbo2">
 	<div class="container">
 		<h1 class="center heading" >HOW DOES IT WORK?</h1>
@@ -52,7 +50,7 @@
 		<div class="container abcont" >
 			<p>The student marks data including the relevent course information is uploded in the prescribed format through the upload page. The platform preprocesses the data and then the mean, average, variance, etc. is calculated. The processed data is saved in the database for furthur uses.</p>
 		</div>
-		
+
 		<h2 class="center caps"><b>Visualize The data From Every Angle</b></h2>
 		<center><img  class="abimg" src="images/abs3.png"/></center>
 		<div class="container abcont" >
@@ -63,15 +61,15 @@
 		<center><img  class="abimg" src="images/abs5.png"/></center>
 		<div class="container abcont" >
 			<a id="abtsec" class="abtlnk" href=""><p>The platfrom has extensive tools to visualize and moderate the students data according to specific requirenments. The platform enables the user to make specific changes to the data set and see the changes in the form of updated visualizations in real-time. The changes made to the data can be saved while retainig the original data</p></a>
-		</div>		
+		</div>
 
 	</div>
 </div>
-	
+
 <div class="jumbotron" id="Jumbo4">
 	<div class="container">
 
-		<h1 class="center heading" >PLATFORM</h1>
+		<h1 class="center heading" >Today's Menu</h1>
 		<div style="text-align: center">
 			<p >On the back-end, the Modratr platform comprises a suite of capabilities for integrating tabular data into coherent models, performing complex computations over models, and sharing and iterating on analytic products.</p>
 		</div>
@@ -82,12 +80,12 @@
 					<p>The platform uses multiple databases to store the uploded data. The data set is tracked and periodically saved and all changes are logged.
 					All the copies of the modified data is also saved </p>
 				</div>
-				
+
 				<div class="col-md-6" >
 					<h2><b>VISUALIZATION ENGINE</b></h2>
 					<p>The platfrom has powerful and flexible visulization capabilities. It uses several different visualization techniques to represent the data according to the need of the user. </p>
 				</div>
-	
+
 				<div class="col-md-6" >
 				 	<h2><b>MODERATION ENGINE</b></h2>
 					<p>Using the vast moderation faclities provided by the platform, the user can moderate the data according to the specifications. It tools which suggests the users on how to best moderate the data.</p>
@@ -95,22 +93,22 @@
 
 				<div class="col-md-6" >
 					<h2><b>HISTORY SENSITIVE</b></h2>
-					<p>The platform saves the changes made to the dataset in real time so that the user doesnt loose their changes in case of any faliures. The user can also go back to any version of the changed dataset.</p>		
-				</div>		
+					<p>The platform saves the changes made to the dataset in real time so that the user doesnt loose their changes in case of any faliures. The user can also go back to any version of the changed dataset.</p>
+				</div>
 				<div class="col-md-6" >
 					<h2><b>ANOMOLY DETECTION</b></h2>
-					<p>The Platform  has the ability to detect and correct any anomolies in the uploaded data. It also alerts the user about the anomolies and the corrective action it has taken to resolve the said anomolies</p>		
-				</div>		
-				
+					<p>The Platform  has the ability to detect and correct any anomolies in the uploaded data. It also alerts the user about the anomolies and the corrective action it has taken to resolve the said anomolies</p>
+				</div>
+
 				<div class="col-md-6" >
 					<h2><b>DATA ARCHIVING</b></h2>
-					<p>Every data uploded to the platform is saved in the database and any moderation done by the user is refelected on a copy of the data. The original is not touched. </p>		
-				</div>		
+					<p>Every data uploded to the platform is saved in the database and any moderation done by the user is refelected on a copy of the data. The original is not touched. </p>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-	
+	<!--
 <div class="jumbotron" id="Jumbo5">
 	<div class="container">
 		<h1 class="center heading" >INDIA</h1>
@@ -119,7 +117,7 @@
 		<div class="container abcont" >
 			<p>The Platform act as a Data repository. All the data uploaded is securely stored in several databases.Full access is provided only to a very limited amount of authorized users. Any changes or moderations done to the data is logged and saved in real time.The authorized users can access this saved form of data at any time.</p><p>
 		</div>
-		
+
 		<h2 class="center"><b> Moderation tools</b></h2>
 		<div class="container abcont" >
 			<p>The platform provides several tools for moderation of marks data. For example the user can use the sliders to modify the ranges of each grade.It also has the capabilities to preprocess the data to detect and correct any anomalies. </p>
@@ -129,9 +127,9 @@
 		<div class="container abcont" >
 			<p>The data is visualized is several differnt ways. The user can use these visualization as a reference to moderate the data accordingly. Any moderation done is refected on the vizualization. Also the intial vizualization is maintained so that the user has some point of referance.
 		</p>
-		</div>		
+		</div>
 	</div>
-</div>
+</div> -->
 <div class="footer" id="Jumbo3">
 		<div class="container center">
 			<h3>Developed By Team 7</h3>
@@ -146,7 +144,7 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/script.js"></script>
 <script >
-	
+
 
 	$(document).ready(function() {
   	$("#ov").css("background-color", "#fff");
@@ -154,12 +152,12 @@
 
 
 });
-	
+
 	$(document).ready(function() {
   	$("#Jumbo4").hide();
   	$("#Jumbo5").hide();
   	$("#Jumbo2").show();
-  	
+
 });
 	$("#ov").click(function() {
 
@@ -177,10 +175,10 @@
   	$("#Jumbo4").hide();
   	$("#Jumbo5").hide();
   	$("#Jumbo2").show();
-  	
+
 });
 	$("#st").click(function() {
-	
+
 	$("#ov").css("background-color", "transparent");
 	$("#ov").css("color", "#fff");
 
@@ -188,13 +186,13 @@
 	$("#ap").css("color", "#fff");
 
 	$("#st").css("background-color", "#fff");
-	$("#st").css("color", "#000");  	
+	$("#st").css("color", "#000");
 
   	$("#Jumbo2").hide();
   	$("#Jumbo5").hide();
   	$("#Jumbo4").show();
-  	
-});	
+
+});
 	$("#ap").click(function() {
 
   	$("#ov").css("background-color", "transparent");
@@ -204,12 +202,20 @@
 	$("#st").css("color", "#fff");
 
 	$("#ap").css("background-color", "#fff");
-	$("#ap").css("color", "#000");  	
+	$("#ap").css("color", "#000");
 
   	$("#Jumbo4").hide();
   	$("#Jumbo2").hide();
   	$("#Jumbo5").show();
-  	
+
+});
+
+$("#logout").click(function(){
+  console.log("logging out");
+  $.get("/logout-api");
+  window.open("login.html","_self")
+
+
 });
 
 

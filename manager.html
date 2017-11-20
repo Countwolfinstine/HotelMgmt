@@ -2,7 +2,7 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type = "text/css" href="css/styles_manager.css">
-		
+
 	<title>Admin page</title>
 </head>
 
@@ -20,10 +20,10 @@
 			</div>
 
 			<div class = "collapse navbar-collapse" id = "collapsemenu">
-				<ul class="nav navbar-nav navbar-right ">		
+				<ul class="nav navbar-nav navbar-right ">
 					<li><a href="home.html">Home</a></li>
 					<li><a href="analytics.html">Analytics</a></li>
-					<li><a href="login.html">Logout</a></li>
+					<li><a id="logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 					<td>Mexico</td>
 					<td>Mexico</td>
 				</tr>
-			</table>	
+			</table>
 		</div>
 		<br><br>
 
@@ -73,24 +73,24 @@
 				</table>
 			</div>
 
-		<div id="inventory">	
+		<div id="inventory">
 			<br><br>
 			<a onclick="shdiv()"><p><b>Update ingredient Quantity </b></p></a>
-			
+
 			<div id="inventory_update_quantity" class="subd1">
 				<input type="text" class = "form-control" name="update_ingredient_name" id="update_ingredient_name" placeholder="Ingredient Name"/>
 				<input type="number" class="form-control" name="update_ingredient_quantity" id="update_ingredient_quantity" placeholder="Quantity"/>
 				<input type="button" name="update" value="update" id="btn_inventory_update_quantity" class="invbut btn btn-default"/>
 			</div>
-			
-			
+
+
 			<a onclick="shdiv2()"><p><b>Add new ingredient </b></p></a>
 			<div id="inventory_add_new" class="subd2">
 				<input type="text" class = "form-control" name="new_ingredient_name" id="new_ingredient_name" placeholder="Ingredient Name"/>
 				<input type="number" class="form-control" name="new_ingredient_quantity" id="new_ingredient_quantity" placeholder="Quantity"/>
 				<input type="button" name="update" value="update" id="btn_inventory_add_new" class="invbut btn btn-default ">
 			</div>
-			
+
 			<a onclick="shdiv3()"><p><b>Add new food item to menu </b></p></a>
 			<div id="food_add_new" class="subd3">
 				<input type="text" class = "form-control" name="food_name" id="food_name" placeholder="Food Name"/>
@@ -98,7 +98,7 @@
 				<input type="number" class="form-control" name="num_ingredients" id="num_ingredients" placeholder="Total Ingredients" max="10"/>
 				<input type="button" name="update" value="update" id="btn_food_add_new" class="invbut btn btn-default">
 			</div>
-			
+
 			<a onclick="shdiv4()"><p><b>Add ingredient and quantity to item</b></p></a>
 			<div id="food_ingredient_add" class="subd4">
 				<input type="text" class = "form-control" name="food_ingredient_fname" id="food_ingredient_fname" placeholder="Food Name">
@@ -106,7 +106,7 @@
 				<input type="number" class="form-control" name="food_ingredient_iquant" id="food_ingredient_iquant" placeholder="Quantity">
 				<input type="button" name="update" value="update" id="btn_food_ingredient_add" class="invbut btn btn-default">
 			</div>
-			
+
 			<a onclick="shdiv5()"><p><b>Fetch recommendation</b></p></a>
 			<div id="food_sold" class="subd5">
 				<label > Start date </label>
@@ -114,7 +114,7 @@
 				<label>End Date</label>
 				<input type="date" name="end_date" id="end_date" class="form-control"/>
 				<input type="button" name="go" value="fetch Data" id="btn_food_sold"/ class="invbut btn btn-default">
-				
+
 				<table id="table_food_sold" class="table table-hover">
 					<tr>
 						<th>Food Item</th>
