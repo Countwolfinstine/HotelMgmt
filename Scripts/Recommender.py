@@ -113,6 +113,9 @@ def main():
     uid = int(input())   
     take_input()
     recommendation_list = user_reommendations(uid)
-    print(json.dumps(recommendation_list))
+    recommendations_json = {}
+    for i in range(len(recommendation_list)):
+        recommendations_json[i]=recommendation_list[i]
+    print(json.dumps(recommendations_json))
 if __name__ == "__main__":
     main()

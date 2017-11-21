@@ -86,6 +86,8 @@ $('form').submit(function (e) {
     }
     else{
         $.post('/signup-api', { username: $('#userName').val(), password: $('#inputPassword').val(), email:$("#inputEmail").val(), phoneNumber: $('#phoneNumber').val() });
+        window.alert("Successfully Registered")
+        window.open("login.html","_self")
     }
 });
 

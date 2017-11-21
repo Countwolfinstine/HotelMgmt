@@ -1,0 +1,72 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type = "text/css" href="css/styles_analytics_home.css">
+  <title>Analytics page</title>
+</head>
+
+<body>
+  <script src="js/d3.v3.min.js"></script>
+  <nav class="navbar navbar-default navbar-fixed-top" id="navv">
+    <div class="container">
+      
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+      </div>
+
+      <div class = "collapse navbar-collapse" id = "collapsemenu">
+        <ul class="nav navbar-nav navbar-right ">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="manager.html">Admin</a></li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+
+  <div id = "graph-div" class="container">
+      <h1>Sentiment Analysis</h1>
+      <h4 id="senti0">Overall Sentiment of Customers : </h4>
+      <h4 id="senti1">Most positive Feedback : </h4>
+      <h4 id="senti2">Most negetive Feedback : </h4>
+  </div>
+
+  <div id="sale-analysis" class="container graph1">
+      <h1>Sales Analysis</h1>
+  </div>
+
+  <div id="food-analysis" class="container graph1">
+      <h1>Food Rating Analysis</h1>
+  </div>
+  
+<script type = "text/javascript" src = "js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript">
+  
+$( document ).ready(function() {
+    $.get("sentiment-api",function(result){
+      console.log(result);
+      result = JSON.parse(result);  
+      $("#senti0").append(result["0"]);
+      $("#senti1").append("\""+result["1"]+"\"");
+      $("#senti2").append("\""+result["2"]+"\"");
+    })
+});
+
+$("#sale-analysis").click(function(){
+  window.open("analytics.html","_self")
+});
+
+$("#food-analysis").click(function(){
+  window.open("analytics2.html","_self")
+});
+
+</script>
+</body>
+
+</html>

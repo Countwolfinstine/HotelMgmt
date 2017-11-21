@@ -21,17 +21,18 @@ $('form').submit(function (e) {
 			window.alert("Password or Email ID is wrong");
 		}
 		else{
-			if(data[0].	autorization == "Customer"){
+			console.log(data[0].autorization);
+			if(data[0].autorization == "Customer"){
 				console.log("Customer has logged in" + data);					
 				window.alert("successful Login");
 				window.open("index.html","_self");
 			}
-			else if(data[0].	autorization == "Waiter"){
+			else if(data[0].autorization == "Waiter"){
 				console.log("Waiter has logged in");
 				window.open("waiter2.html","_self")
 			}
 
-			else if(data[0].	autorization == "Manager"){	
+			else if(data[0].autorization == "Manager"){	
 				window.alert("successful Login");
 				window.open("manager.html","_self")
 			}
