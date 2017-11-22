@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.4.14
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2017 at 05:53 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 7.0.13
+-- Generation Time: Nov 22, 2017 at 05:19 PM
+-- Server version: 5.6.26
+-- PHP Version: 5.6.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `current_orders`
 --
 
-CREATE TABLE `current_orders` (
+CREATE TABLE IF NOT EXISTS `current_orders` (
   `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -36,8 +36,11 @@ CREATE TABLE `current_orders` (
 --
 
 INSERT INTO `current_orders` (`order_id`, `item_id`) VALUES
-(250, 4),
-(251, 1);
+(251, 1),
+(252, 1),
+(253, 2),
+(254, 3),
+(250, 4);
 
 -- --------------------------------------------------------
 
@@ -45,10 +48,36 @@ INSERT INTO `current_orders` (`order_id`, `item_id`) VALUES
 -- Table structure for table `feedback`
 --
 
-CREATE TABLE `feedback` (
+CREATE TABLE IF NOT EXISTS `feedback` (
   `userid` int(11) NOT NULL,
   `feedback` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`userid`, `feedback`) VALUES
+(10, 'can improve on the menu and get more new delicacies'),
+(11, 'the waiter was very rude and gave wrong items'),
+(12, 'lot of good crowd and peaceful place'),
+(13, 'did not know how to reach this place but when I found it the taste of the food overshadowed every th'),
+(14, 'does not have online wallet system'),
+(15, 'must visit place'),
+(16, 'very delicious food and good cleanliness'),
+(17, 'the food is very cheap and no compromise in taste'),
+(18, 'chatni was made by perfection'),
+(19, 'its just like having home food outside home'),
+(20, 'feedback'),
+(21, 'dosa was good great ambiance'),
+(22, 'excellent hygiene'),
+(23, 'need to improve on the service staff'),
+(24, 'very fast service and hot food'),
+(25, 'very helpful waiters'),
+(26, 'the location is great'),
+(27, 'ver good view and less pollution'),
+(28, 'very good precision in making dosa always the best and crisp'),
+(29, 'very pocket friendly, good for light food');
 
 -- --------------------------------------------------------
 
@@ -56,27 +85,27 @@ CREATE TABLE `feedback` (
 -- Table structure for table `ingredients`
 --
 
-CREATE TABLE `ingredients` (
+CREATE TABLE IF NOT EXISTS `ingredients` (
   `ing_id` int(11) NOT NULL,
   `ing_name` varchar(30) NOT NULL,
   `quantity` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ingredients`
 --
 
 INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
-(1, 'Dosa Batter', 50),
+(1, 'Dosa Batter', 47),
 (2, 'Potato', 100),
-(3, 'Curry Leaves', 50),
+(3, 'Curry Leaves', 48),
 (4, 'Tamrind', 20),
 (5, 'Tomato', 100),
 (6, 'Idli Batter', 40),
 (7, 'Onion', 44),
-(8, 'Rice', 95),
-(9, 'Garam Masala', 60),
-(10, 'Chilly Powder', 40),
+(8, 'Rice', 91),
+(9, 'Garam Masala', 52),
+(10, 'Chilly Powder', 34),
 (11, 'Rajma', 43),
 (12, 'Urad Dal', 20),
 (13, 'Lentils', 37),
@@ -98,7 +127,7 @@ INSERT INTO `ingredients` (`ing_id`, `ing_name`, `quantity`) VALUES
 -- Table structure for table `ingredients_required`
 --
 
-CREATE TABLE `ingredients_required` (
+CREATE TABLE IF NOT EXISTS `ingredients_required` (
   `ing_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `ing_quantity_required` int(11) NOT NULL
@@ -177,11 +206,11 @@ INSERT INTO `ingredients_required` (`ing_id`, `item_id`, `ing_quantity_required`
 -- Table structure for table `items`
 --
 
-CREATE TABLE `items` (
+CREATE TABLE IF NOT EXISTS `items` (
   `item_name` varchar(20) NOT NULL,
   `item_id` int(11) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `items`
@@ -215,13 +244,13 @@ INSERT INTO `items` (`item_name`, `item_id`, `price`) VALUES
 -- Table structure for table `orders_log`
 --
 
-CREATE TABLE `orders_log` (
+CREATE TABLE IF NOT EXISTS `orders_log` (
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders_log`
@@ -466,7 +495,10 @@ INSERT INTO `orders_log` (`orderid`, `userid`, `itemid`, `quantity`, `time`) VAL
 (248, 54, 10, 1, '2017-09-15 03:13:00'),
 (249, 11, 3, 1, '2017-09-16 03:15:00'),
 (250, 54, 4, 1, '2017-09-16 03:20:00'),
-(251, 1, 1, 0, '2017-11-12 13:53:08');
+(251, 1, 1, 0, '2017-11-12 13:53:08'),
+(252, 23, 1, 0, '2017-11-22 16:16:48'),
+(253, 23, 2, 0, '2017-11-22 16:16:48'),
+(254, 23, 3, 0, '2017-11-22 16:16:48');
 
 -- --------------------------------------------------------
 
@@ -474,14 +506,14 @@ INSERT INTO `orders_log` (`orderid`, `userid`, `itemid`, `quantity`, `time`) VAL
 -- Table structure for table `order_billing`
 --
 
-CREATE TABLE `order_billing` (
+CREATE TABLE IF NOT EXISTS `order_billing` (
   `tableid` int(11) NOT NULL,
   `orderid` int(11) NOT NULL,
   `userid` int(11) NOT NULL,
   `itemid` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_billing`
@@ -491,7 +523,10 @@ INSERT INTO `order_billing` (`tableid`, `orderid`, `userid`, `itemid`, `quantity
 (1, 247, 11, 11, 1, '2017-09-16 03:00:00'),
 (2, 248, 54, 10, 1, '2017-09-16 03:13:00'),
 (1, 249, 11, 3, 1, '2017-09-16 03:15:00'),
-(2, 250, 54, 4, 1, '2017-09-16 03:20:00');
+(2, 250, 54, 4, 1, '2017-09-16 03:20:00'),
+(7, 252, 23, 1, 1, '2017-11-22 16:16:47'),
+(7, 253, 23, 2, 2, '2017-11-22 16:16:48'),
+(7, 254, 23, 3, 1, '2017-11-22 16:16:48');
 
 -- --------------------------------------------------------
 
@@ -499,7 +534,7 @@ INSERT INTO `order_billing` (`tableid`, `orderid`, `userid`, `itemid`, `quantity
 -- Table structure for table `rating`
 --
 
-CREATE TABLE `rating` (
+CREATE TABLE IF NOT EXISTS `rating` (
   `userid` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
   `rating` int(11) NOT NULL
@@ -704,13 +739,13 @@ INSERT INTO `rating` (`userid`, `item_id`, `rating`) VALUES
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `emailid` varchar(40) NOT NULL,
   `userid` int(11) NOT NULL,
   `password` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `autorization` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -782,7 +817,8 @@ INSERT INTO `users` (`emailid`, `userid`, `password`, `username`, `autorization`
 ('Sham.Kumar8@yahoo.com', 63, 'augwwZoB', 'Sham', 'Customer'),
 ('Surya.Bhat94@live.com', 64, 'gJXaRqPP', 'Surya', 'Customer'),
 ('Sam.Prasad16@live.com', 65, 'bubHRmH', 'Sam', 'Customer'),
-('Sam.Iyer51@hotmail.com', 66, 'wJYiQjUYl', 'Sam', 'Customer');
+('Sam.Iyer51@hotmail.com', 66, 'wJYiQjUYl', 'Sam', 'Customer'),
+('w@w.com', 103, 'wwwwww', 'w', 'Customer');
 
 --
 -- Indexes for dumped tables
@@ -858,27 +894,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ingredients`
 --
 ALTER TABLE `ingredients`
-  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `ing_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `orders_log`
 --
 ALTER TABLE `orders_log`
-  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=255;
 --
 -- AUTO_INCREMENT for table `order_billing`
 --
 ALTER TABLE `order_billing`
-  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+  MODIFY `orderid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=255;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=104;
 --
 -- Constraints for dumped tables
 --
@@ -888,31 +924,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `current_orders`
   ADD CONSTRAINT `current_orders_ibfk_1` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
-
---
--- Constraints for table `feedback`
---
-ALTER TABLE `feedback`
-  ADD CONSTRAINT `feedback_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
-
---
--- Constraints for table `ingredients_required`
---
-ALTER TABLE `ingredients_required`
-  ADD CONSTRAINT `Relational_mapping1` FOREIGN KEY (`ing_id`) REFERENCES `ingredients` (`ing_id`),
-  ADD CONSTRAINT `Relational_mapping2` FOREIGN KEY (`item_id`) REFERENCES `items` (`item_id`);
-
---
--- Constraints for table `orders_log`
---
-ALTER TABLE `orders_log`
-  ADD CONSTRAINT `orders_log_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
-
---
--- Constraints for table `order_billing`
---
-ALTER TABLE `order_billing`
-  ADD CONSTRAINT `order_billing_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
