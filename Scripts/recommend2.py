@@ -6,7 +6,7 @@ import pymysql
 hostname = 'localhost'
 username = 'root'
 password = ''
-database = 'restaurantmgmt'
+database = 'restaurantmanagement'
 rows=[]
 
 def doQuery( conn, hesaru ) :
@@ -23,12 +23,12 @@ def doQuery( conn, hesaru ) :
 		b['time']=a[4]
 		rows.append(b)
 
-tablName="orderlog"
+tablName="orders_log"
 myConnection = pymysql.connect( host=hostname, user=username, passwd=password, db=database )
 doQuery( myConnection,tablName )
 myConnection.close()
 df1=pd.DataFrame(rows, columns=["orderid","userid","itemid","quantity","time"])
-print(df1)
+# print(df1)
 #df1=pd.read_csv("orderlog.csv")
 item=set(df1["itemid"])
 dates=set(x.date() for x in df1["time"])
@@ -43,7 +43,7 @@ def time_in_range(start, end, x):
 #dict2=dict((e,0) for e in item)
 dict1={}
 #dict1=dict((n,dict2) for n in timeslots)
-print(dict1)
+# print(dict1)
 for i,v in df1.iterrows():
 	#print(v["itemid"])
 	t=v["time"].time()
@@ -61,7 +61,8 @@ for i,v in df1.iterrows():
 				dict1[n]=dict((e,0) for e in item)
 			break
 	#print(dict1)
-	
+#print(dict1)
 for k in dict1:
-	dict1[k]=max(dict1[k].items(), key=operator.itemgetter(1))[0]
-print(dict1)
+	dict1[k]=str(max(dict1[k].items(), key=operator.itemgetter(1))[0])
+print(json.dumps(dict(dict1)))
+# print(dict1)

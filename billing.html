@@ -21,8 +21,8 @@
 			<div class = "collapse navbar-collapse" id = "collapsemenu">
 				<ul class="nav navbar-nav navbar-right ">
 					<li><a href="home.html">Home</a></li>
-					<li><a href="billing.html">Billing</a></li>
 					<li><a href="rating.html">Rating</a></li>
+					<li><a href="waiter2.html">Order</a></li>
 					<li><a id="logout">Logout</a></li>
 				</ul>
 			</div>
@@ -30,34 +30,23 @@
 	</nav>
 
 	<div class="container">
-
-		<form action="/submit-order/" target="du">
-			<h3><b>Enter user id</b></h3>	
-			<input type="number" id="user_id" name="user_id" class="form-control" placeholder="User ID" min="0" >
-			<input type="button" id="btn_user_id" class="btn btn-default" name="btn_user_id" value="Get Menu" >
-
-			<h3 id="submit-text"><b>Enter table Number</b></h3>
-			<select id="table_no" name="table_no" class="form-control" >
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-				<option value="7">7</option>
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-			</select>
-			<table id="menu_items" class="table table-responsive table-striped table-hover">
+		<div id="check">
+			<h3><b>Check out:</b></h3>
+			<input type="number" id="check_userId" placeholder="check_userId" class="form-control" />
+			<input type="number" id="check_tableNo" placeholder="check_tableNo" class="form-control" />
+			<input type="button" value="checkout" id="btn_check" class="btn btn-default" />
+		</div>
+		<div id="bill">
+			<table id="table_bill" class="table table-hover table-striped table_responsive">
 				<tr>
-					<th>Name</th>
-					<th>Cost</th>
+					<th>Item name</th>
 					<th>Quantity</th>
+					<th>Price</th>
+					<th>Amount</th>
 				</tr>
-			</table>
-			<input type="submit" name="submit" id="form-submit" class="btn btn-default" value="Submit" formmethod="post">
-		</form>
+			</table>	
+		</div>
+
 		<br><br>
 		<iframe src="" id = "du" width="0px" height="0px"></iframe>
 	</div>
@@ -65,56 +54,41 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#menu_items").hide()
-		
 		$("#table_bill").hide()
-		$("#form-submit").hide()
 
-        $("#du").hide()
 		// alert("/get-menu/"+$('#user_id').val());
 		$("#btn_user_id").click(function(){
-			$.getJSON("/get-menu/"+$('#user_id').val(),printTerms);	
+			$.getJSON("/get-menu/"+$('#user_id').val(),printTerms);
+
 		});
 		
-		
-		var $form = $('form');
-   		$form.submit(function(){
-     		 $.post($(this).attr('action'), $(this).serialize(), function(response){
-            window.alert("nice")
-      },'json');
-      return false;
-   			});
-
-   		$('form').submit(function(event){
-			window.alert("Order placed succesfully");
+		$('form').submit(function(event){
+			window.aler("Order Sucessfully Placed");
 			$("#menu_items").hide();		
 		});
 
 		$("#btn_check").click(function(){
 			console.log("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
 			$.getJSON("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val(),printCheck);
+			//$.get("/billing-api/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
+
 		});
+
 	});
 
 	function printTerms(terms){
-		$("#form-submit").show();
-		
-		$("#submit-text").show();
-		$("#menu_items").empty();
-		$("#menu_items").show();
+		$("#menu_items").empty()
+		$("#menu_items").show()
 		$.each(terms,function(index,term){	
 			$("#menu_items").append("<tr id = food"+term['item_id']+">"+
 				"<td>"+term['item_name']+"</td>"+
 				"<td>"+term['price']+"</td>"+
-				"<td><input class=form-control type=\"number\" name=\""+term['item_id']+"\" value=\"0\" min=0 ></td>"+
+				"<td><input class=form-control type=\"number\" name=\""+term['item_id']+"\" value=\"0\"></td>"+
 				"</tr>");
 		});
 		$.get("/recommendation-api/"+$('#user_id').val(), function(result){
 		 	result = JSON.parse(result);
 		 	console.log(result);
-		 	if (result.length == 0 ) {
-		 		$("#food6").addClass("success")
-		 		$("#food19").addClass("success")
-		 	}
 		 	for(var key in result){
 		 		console.log("#food"+result[key])
 		 		$("#food"+result[key]).addClass("success")

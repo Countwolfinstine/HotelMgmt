@@ -2,68 +2,109 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type = "text/css" href="css/styles_analytics_home.css">
-  <title>Analytics page</title>
+	<title>Analytics page</title>
 </head>
 
 <body>
-  <script src="js/d3.v3.min.js"></script>
-  <nav class="navbar navbar-default navbar-fixed-top" id="navv">
-    <div class="container">
-      
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
-      </div>
+	<script src="js/d3.v3.min.js"></script>
+	<nav class="navbar navbar-default navbar-fixed-top" id="navv">
+		<div class="container">
+			
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+			</div>
 
-      <div class = "collapse navbar-collapse" id = "collapsemenu">
-        <ul class="nav navbar-nav navbar-right ">
-          <li><a href="home.html">Home</a></li>
-          <li><a href="manager.html">Admin</a></li>
-          <li><a href="login.html">Logout</a></li>
-        </ul>
-      </div>
+			<div class = "collapse navbar-collapse" id = "collapsemenu">
+				<ul class="nav navbar-nav navbar-right ">
+					<li><a href="home.html">Home</a></li>
+					<li><a href="manager.html">Admin</a></li>
+					<li><a href="login.html">Logout</a></li>
+				</ul>
+			</div>
 
-    </div>
-  </nav>
+		</div>
+	</nav>
 
-  <div id = "graph-div" class="container">
-      <h1>Sentiment Analysis</h1>
-      <h4 id="senti0">Overall Sentiment of Customers : </h4>
-      <h4 id="senti1">Most positive Feedback : </h4>
-      <h4 id="senti2">Most negetive Feedback : </h4>
-  </div>
+	<div id = "graph-div" class="container">
+			<h1>Sentiment Analysis</h1>
+			<h4 id="senti0">Overall Sentiment of Customers : </h4>
+			<h4 id="senti1">Most positive Feedback : </h4>
+			<h4 id="senti2">Most negetive Feedback : </h4>
+	</div>
 
-  <div id="sale-analysis" class="container graph1">
-      <h1>Sales Analysis</h1>
-  </div>
+	<div id = "graph-div" class="container">
+			<h1>Recommended food to be prepared </h1>
+			<h3 id="Morning">Morning : </h3>
+			<h3 id="Afternoon">Afternoon : </h3>
+			<h3 id="Evening">Evening : </h3>	
+	</div>
 
-  <div id="food-analysis" class="container graph1">
-      <h1>Food Rating Analysis</h1>
-  </div>
-  
+	<div id="sale-analysis" class="container graph1">
+			<h1>Sales Analysis</h1>
+	</div>
+
+	<div id="food-analysis" class="container graph1">
+			<h1>Food Rating Analysis</h1>
+	</div>
+	
 <script type = "text/javascript" src = "js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-  
+	
 $( document ).ready(function() {
-    $.get("sentiment-api",function(result){
-      console.log(result);
-      result = JSON.parse(result);  
-      $("#senti0").append(result["0"]);
-      $("#senti1").append("\""+result["1"]+"\"");
-      $("#senti2").append("\""+result["2"]+"\"");
-    })
+		$.get("sentiment-api",function(result){
+			//console.log(result);
+			result = JSON.parse(result);  
+			$("#senti0").append(result["0"]);
+			$("#senti1").append("\""+result["1"]+"\"");
+			$("#senti2").append("\""+result["2"]+"\"");
+		});
+	 	$.get("/recommendation-food-api",function(result){
+			//console.log(result);
+			foodmapping = JSON.parse(result);  
+			
+				$.get("/getfood-name/" + foodmapping["8:0:0-11:0:0"],function(result2){
+						//console.log(result2);
+						$("#Morning").append(result2);
+						foodmapping["8:0:0-11:0:0"] = result2
+						console.log(foodmapping["8:0:0-11:0:0"])
+
+
+					});
+
+				$.get("/getfood-name/" + foodmapping["11:0:0-14:0:0"],function(result2){
+						//console.log(result2);
+						$("#Afternoon").append(result2);
+						foodmapping["11:0:0-14:0:0"] = result2
+						console.log(foodmapping["11:0:0-14:0:0"])
+
+
+					});
+				
+				$.get("/getfood-name/" + foodmapping["20:1:0-23:0:0"],function(result2){
+						//console.log(result2);
+						$("#Evening").append(result2);
+						foodmapping["20:1:0-23:0:0"] = result2
+						console.log(foodmapping["20:1:0-23:0:0"])
+
+
+					});
+			
+				console.log(foodmapping);
+		});
+		 
 });
 
 $("#sale-analysis").click(function(){
-  window.open("analytics.html","_self")
+	window.open("analytics.html","_self")
 });
 
 $("#food-analysis").click(function(){
-  window.open("analytics2.html","_self")
+	window.open("analytics2.html","_self")
 });
 
 </script>

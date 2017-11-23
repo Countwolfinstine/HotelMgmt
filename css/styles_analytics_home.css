@@ -35,7 +35,7 @@ h1{
 
 #graph-div{
 	text-align: center;
-	margin-top: 8%;
+	margin-top: 60px;
 	background: #f5f5f5;
 	opacity: 0.9;
 	line-height: 90px;
@@ -83,7 +83,7 @@ div#container
 .graph1{ 
 	cursor: pointer; 
 	text-align: center;
-	margin-top: 8%;
+	margin-top: 60px;
 	background: #f5f5f5;
 	opacity: 0.9;
 	line-height: 90px;

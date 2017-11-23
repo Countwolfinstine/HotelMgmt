@@ -93,6 +93,13 @@ app.get("/queue-api",function(req,res){
 	});
 });
 
+app.get('/getfood-name/:fname',function(req,res){
+	con.query("SELECT item_name FROM items WHERE item_id = " + req.params.fname,function(err,result,fields){
+		if(err) throw err;
+		res.send(result[0].item_name);
+	});
+});
+
 app.post("/queue-api", function(req, res){
 	console.log('gg');
 });
@@ -191,6 +198,15 @@ app.get("/recommendation-api/:usserid",function(req,res){
     });
 });
 
+app.get("/recommendation-food-api/",function(req,res){
+	var shell = new PythonShell('/Scripts/recommend2.py', { mode: 'text'});
+	shell.send();
+    //received a message sent from the Python script (a simple "print" statement)
+    shell.on('message', function (message) {
+    	res.send(message);        
+    });
+});
+
 app.post("/waiter-input",function(req,res){
 });
 
@@ -203,12 +219,33 @@ app.get("/check2/:userId/:tableNo",function(req,res){
 	});
 });
 
-app.get("/check/:userId/:tableNo",function(req,res){
+app.get("/check2/:userId/:tableNo",function(req,res){
 	console.log("SELECT order_billing.itemid, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo);
-	con.query("SELECT item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err,result,fields){
+	con.query("SELECT itemid, item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err,result,fields){
 		console.log(result[0].itemid);
 		console.log(result[0].quantity);
 		res.send(result);
+	});
+});
+
+
+
+
+app.get("/check/:userId/:tableNo",function(req,res){
+	console.log("SELECT order_billing.itemid, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo);
+	con.query("SELECT * FROM order_billing WHERE tableid = "+req.params.tableNo+" AND userid = "+req.params.userId , function(err, result,fields){
+		if(err) throw err;
+		if(result.length != 0){
+			con.query("SELECT item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err1,result1,fields1){
+				if(err1) throw err1;
+				console.log(result[0].itemid);
+				console.log(result[0].quantity);
+				res.send(result);
+			});
+		}
+		else{
+			res.send(result)
+		}
 	});
 });
 
