@@ -17,7 +17,8 @@ function successfulLogin(){
 $('form').submit(function (e) {
 	e.preventDefault();
 	$.post('/login-api', {  password: $('#inputPassword3').val(), email:$("#inputEmail3").val()}, function(data){
-		if( data.length == 0 ){
+		console.log(data);
+		if( data.length == 0 || data=="no"){
 			window.alert("Password or Email ID is wrong");
 		}
 		else{
