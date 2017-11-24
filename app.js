@@ -111,6 +111,24 @@ app.delete("/queue-api/:term", function(req,res){
 	res.send(200);
 });
 
+app.get("/manager-api/onload1/", function(req,res){
+    console.log("SELECT * FROM `ingredients`"); 
+    con.query("SELECT * FROM `ingredients`", function(err1,result1,fields1){
+        console.log(result1);
+      	if (err1) throw err1;
+        res.send(result1);
+    });
+});
+
+app.get("/manager-api/onload2", function(req,res){
+	console.log("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC");
+	con.query("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC", function(err1,result1,fields1){
+		console.log(result1);
+		if (err1) throw err1;
+		res.send(result1);
+	})
+});
+
 app.get("/manager-api/update-ingredient/:ingredientName/:ingredientQuantity", function(req,res){
 	console.log("request for ingredient updation");
 	con.query("UPDATE ingredients SET quantity = " + req.params.ingredientQuantity + " WHERE ing_name = \"" + req.params.ingredientName + "\"", function(err, result, fields){
@@ -164,11 +182,11 @@ app.post("/signup-api",function(req,res){
 app.post("/login-api", function(req,res){
 	sess = req.session;
     console.log(req.body);
-    var puncSearchEmail = req.body.email.search("[\"\',\\*]|and|or");
-    var puncSearchPswd = req.body.password.search("[\"\',\\*]|and|or");
+    var puncSearchEmail = req.body.email.search("[\"\'\,\\\*]");
+    var puncSearchPswd = req.body.password.search("[\"\'\,\\\*]");
     console.log(puncSearchPswd);
     console.log(puncSearchEmail);
-    if(!(puncSearchPswd==-1 || puncSearchEmail==-1)){ 
+    if(puncSearchPswd==-1 && puncSearchEmail==-1){ 
     	con.query("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY `userid` ASC", function(err,result,fields){
     		if(result.length > 0) {
     			sess.email = req.body.email;
