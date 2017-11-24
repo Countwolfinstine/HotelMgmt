@@ -15,14 +15,14 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+				<a href="/" class="navbar-brand">RESTAURANT MANAGEMENT</a>
 			</div>
 
 			<div class = "collapse navbar-collapse" id = "collapsemenu">
 				<ul class="nav navbar-nav navbar-right ">
 					<li><a href="home.html">Home</a></li>
 					<li><a href="manager.html">Admin</a></li>
-					<li><a href="login.html">Logout</a></li>
+					<li><a id="logout">Logout</a></li>
 				</ul>
 			</div>
 		</div>
@@ -155,6 +155,10 @@ function draw(data) {
     .attr("height", function(d) { return height - y(d.close); }); // flip the height, because y's domain is bottom up, but SVG renders top down
 
 }
+  $("#logout").click(function(){
+    console.log("logging out");
+    $.get("/logout-api");
+    window.open("login.html","_self")
 
 </script>
 </body>

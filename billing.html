@@ -3,7 +3,7 @@
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type = "text/css" href="css/styles_wait2.css">
-	<title></title>
+	<title>Billing </title>
 </head>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <body>
@@ -70,7 +70,7 @@
 		$("#btn_check").click(function(){
 			console.log("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
 			$.getJSON("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val(),printCheck);
-			//$.get("/billing-api/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
+			
 
 		});
 
@@ -115,7 +115,13 @@
 			"<td></td>"+
 			"<td>"+total+"</td>"+
 			"</tr>");
+	$.get("/billing-api/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
 	}
+		$("#logout").click(function(){
+	  console.log("logging out");
+	  $.get("/logout-api");
+	  window.open("login.html","_self")
+
 </script>
 
 </html>

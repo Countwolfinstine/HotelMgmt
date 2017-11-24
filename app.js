@@ -46,7 +46,6 @@ app.get("/",function(req,res){
 	sess = req.session;
 	console.log(sess.email + sess.auth);
 	if(sess.email) {
-
 		if(sess.auth == "Customer")
 			res.redirect('/index.html');
 		else if(sess.auth == "Manager")
@@ -67,7 +66,6 @@ app.get("/logout-api",function(req,res){
 	sess.email="";
 	res.send(200);
 });
-
 
 app.get("/analytics-api",function(req,res){
 	con.query("SELECT AVG(rating) AS c,rating.item_id, items.item_name FROM  rating  INNER JOIN items ON (rating.item_id = items.item_id) GROUP BY  item_id " , function(err,result,fields){
@@ -166,12 +164,11 @@ app.post("/signup-api",function(req,res){
 app.post("/login-api", function(req,res){
 	sess = req.session;
     console.log(req.body);
-     var puncSearchEmail = req.body.email.search("[\"\',\\*]|and|or");
-     var puncSearchPswd = req.body.password.search("[\"\',\\*]|and|or");
-     console.log(puncSearchPswd);
-     console.log(puncSearchEmail);
-     if(!(puncSearchPswd==-1 || puncSearchEmail==-1)){
-     
+    var puncSearchEmail = req.body.email.search("[\"\',\\*]|and|or");
+    var puncSearchPswd = req.body.password.search("[\"\',\\*]|and|or");
+    console.log(puncSearchPswd);
+    console.log(puncSearchEmail);
+    if(!(puncSearchPswd==-1 || puncSearchEmail==-1)){ 
     	con.query("SELECT * FROM users WHERE emailid = \"" + req.body.email + "\" AND password = \"" + req.body.password + "\" ORDER BY `userid` ASC", function(err,result,fields){
     		if(result.length > 0) {
     			sess.email = req.body.email;
@@ -179,7 +176,7 @@ app.post("/login-api", function(req,res){
     			console.log("login " + sess.email + " " + sess.auth);
     			res.send(result);
     		}
-    		else{
+    		else {
     			res.send(result);
     		}
     	});
@@ -235,12 +232,15 @@ app.get("/check/:userId/:tableNo",function(req,res){
 	console.log("SELECT order_billing.itemid, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo);
 	con.query("SELECT * FROM order_billing WHERE tableid = "+req.params.tableNo+" AND userid = "+req.params.userId , function(err, result,fields){
 		if(err) throw err;
+		console.log(result.length)
 		if(result.length != 0){
+			console.log("gg")
 			con.query("SELECT item_name, quantity, price FROM order_billing INNER JOIN items ON order_billing.itemid=items.item_id WHERE userid="+req.params.userId+" AND tableid="+req.params.tableNo, function(err1,result1,fields1){
 				if(err1) throw err1;
 				console.log(result[0].itemid);
 				console.log(result[0].quantity);
-				res.send(result);
+				console.log(result1)
+				res.send(result1);
 			});
 		}
 		else{
@@ -321,15 +321,31 @@ app.post("/submit-rating/",function(req,res){
 	for (var i in req.body) {
 		if(!(i=="table_no" || i=="submit" || i=="user_id")){
 			if (req.body[i]!=0){
-
-				con.query("INSERT INTO rating (userid, item_id, rating) VALUES ( "+ req.body.user_id +"," + i + ", "+req.body[i]+") ", function(err,result,fields){
-					if (err) throw err;
-				});
+				ratinginsert(req.body.user_id, req.body[i], i);
 			}
 		}
 	}
 	res.send(200);
 });
+
+function ratinginsert(uid, rating, item_id){
+	console.log("SELECT userid, item_id, rating FROM rating WHERE userid = "+uid+ " AND item_id = "+ item_id)
+	con.query("SELECT userid, item_id, rating FROM rating WHERE userid = "+uid+ " AND item_id = "+ item_id, function(err, result,fields){
+		if(err) throw err;
+		if(result.length == 0) {
+			console.log("INSERT INTO rating (userid, item_id, rating) VALUES ( "+ uid +"," + rating + ", "+item_id+") ")
+			con.query("INSERT INTO rating (userid, item_id, rating) VALUES ( "+ uid +"," + item_id + ", "+rating+") ", function(err1,result1,fields1){
+				if (err1) throw err1;
+			});
+		}
+		else{
+			console.log("UPDATE rating SET  rating ="+ rating +" WHERE  userid = " + uid + " AND item_id =" + item_id)
+			con.query("UPDATE rating SET  rating ="+ rating +" WHERE  userid = " + uid + " AND item_id =" + item_id, function(err2,result2,fields2){
+				if(err2) throw err2;
+			});
+		}		
+	});
+}
 
 app.get("/sentiment-api", function(req,res){
 	var shell = new PythonShell('/Scripts/sentimentAnalysis.py', { mode: 'text'});
