@@ -17,7 +17,6 @@
 				</button>
 				<a href="/" class="navbar-brand">RESTAURANT MANAGEMENT</a>
 			</div>
-
 			<div class = "collapse navbar-collapse" id = "collapsemenu">
 				<ul class="nav navbar-nav navbar-right ">
 					<li><a href="home.html">Home</a></li>
@@ -47,7 +46,8 @@
 			</table>	
 		</div>
 
-		<br><br>
+		<br>
+			<input type="button" value="Paid" id="btn_check2" class="btn btn-success" />
 		<iframe src="" id = "du" width="0px" height="0px"></iframe>
 	</div>
 </body>
@@ -55,6 +55,7 @@
 	$(document).ready(function(){
 		$("#menu_items").hide()
 		$("#table_bill").hide()
+		$("#btn_check2").hide()
 
 		// alert("/get-menu/"+$('#user_id').val());
 		$("#btn_user_id").click(function(){
@@ -70,8 +71,6 @@
 		$("#btn_check").click(function(){
 			console.log("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
 			$.getJSON("/check/"+$("#check_userId").val()+"/"+$("#check_tableNo").val(),printCheck);
-			
-
 		});
 
 	});
@@ -115,13 +114,20 @@
 			"<td></td>"+
 			"<td>"+total+"</td>"+
 			"</tr>");
-	$.get("/billing-api/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
+		$.get("/billing-api/"+$("#check_userId").val()+"/"+$("#check_tableNo").val());
+		$("#btn_check").hide();
+		$("#btn_check2").show();
 	}
-		$("#logout").click(function(){
+
+	$("#btn_check2").click(function(){
+		location.reload();
+	});
+
+	$("#logout").click(function(){
 	  console.log("logging out");
 	  $.get("/logout-api");
 	  window.open("login.html","_self")
-
+	});
 </script>
 
 </html>

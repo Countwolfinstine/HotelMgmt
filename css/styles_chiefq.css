@@ -8,6 +8,11 @@ body{
 	font-family: 'Raleway';
 	font-weight:300;
 	height: 100%;
+	background: url(../images/cookwall.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .heading {
@@ -25,13 +30,19 @@ body{
 }
 #Jumbo1
 {
+	padding-bottom: 20px;
 	margin-bottom: 0px;
 	height: 30%;
-	background:url(../images/EAbg.jpg);
 	position: relative;
 	background-size: cover;
-	color: white;
+	color: black;
 }
+
+.jumbotron{
+	background-color: white;
+
+}
+
 #Jumbo2
 {
 	margin-bottom: 0px;
@@ -39,13 +50,19 @@ body{
 	/*background:url(../images/mainback.jpg);*/
 	position: relative;
 	background-size: cover;
-	background-color: #c45611;
+	/*background-color: #c45611;*/
 }
 .fitem{
-	font-size: 20px;
-	padding: 10px;
-	background-color: white;
-	margin: 20px;
+    font-family: 'Rajdhani', Arial;
+	text-align: center;
+	margin-top: 60px;
+	background: #f5f5f5;
+	opacity: 0.9;
+	line-height: 90px;
+	border-style: solid;
+    border-width: 2px;
+    padding: 15px;
+    font-size: 1.5em;
 
 }
 .row p {

@@ -9,18 +9,38 @@
   <title>chief Queue</title>
 </head>
 <body>
-<div class="jumbotron" id="Jumbo1">
-	<div class="container">
-		<div class = "center container">
-			<h1 class="heading"><b>The chief Queue</b></h2>
-			<h2 id="paddtohell" class="heading"> </h2>
-		</div>
-	</div>
-</div>
-<div class="jumbotron" id="Jumbo2">
+
+  <nav class="navbar navbar-default navbar-fixed-top" id="navv">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle = "collapse" data-target ="#collapsemenu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand">RESTAURANT MANAGEMENT</a>
+      </div>
+      <div class = "collapse navbar-collapse" id = "collapsemenu">
+        <ul class="nav navbar-nav navbar-right ">
+          <li><a href="index.html">Home</a></li>
+          <li><a id="logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br>
+  <div class="jumbotron" id="Jumbo1">
+    <div class = "center container">
+     <h1 class="heading"><b>The chief Queue</b></h1>
+   </div>
+  </div>
+<div class="container" id="Jumbo2">
 
 </div>	
 <dl></dl>
+
+<br>
+
 </body>
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -29,43 +49,43 @@
 
     $.getJSON('/queue-api/', printTerms);
     $('form').submit(function (e) {
-        e.preventDefault();
-        $.post('/queue-api', {term: $('#term').val(), defined: $('#defined').val()}, printTerms);
-        this.reset();
+      e.preventDefault();
+      $.post('/queue-api', {term: $('#term').val(), defined: $('#defined').val()}, printTerms);
+      this.reset();
     });
 
-});
+  });
 
-function reload(){
-  location.reload();
-}
+  function reload(){
+    location.reload();
+  }
 
-function printTerms(terms) {
+  function printTerms(terms) {
     console.log('red');
     $('#Jumbo2').empty();
     $.each(terms, function () {
-        var $div = $("<div>", {id: "fooditem", "class": "container fitem"});
-        $('<dt>').text('Order ID :' + this["order_id"]).appendTo($div);
-        $('<dd>').text('Food Item :'+ this["item_name"]).appendTo($div);
-        $('<dd>').text(this["e"]).appendTo($div);
-        $div.appendTo($('#Jumbo2'));
+      var $div = $("<div>", {id: "fooditem", "class": "container fitem"});
+      $('<dt>').text('Order ID : ' + this["order_id"]).appendTo($div);
+      $('<dd>').text('Food Item : '+ this["item_name"]).appendTo($div);
+      $('<dd>').text(this["e"]).appendTo($div);
+      $div.appendTo($('#Jumbo2'));
     });
 
     $('div dt').off('dblclick').dblclick(function() {
-        rs =$(this).text().split(':');
-        $.ajax({
-            url: '/queue-api/' + rs[1],
-            type: 'DELETE',
-            success: reload
-        });
+      rs =$(this).text().split(':');
+      $.ajax({
+        url: '/queue-api/' + rs[1],
+        type: 'DELETE',
+        success: reload
+      });
     });
-}
+  }
 
-$("#fooditem").mouseover(function () {
-		$(this).css({"background-color":"white","color":"#c45611"})
-	});
-$("#fooditem").mouseout(function () {
-		$(this).css({"background-color":"#c45611","color":"white"})
-	});
+  $("#fooditem").mouseover(function () {
+    $(this).css({"background-color":"white","color":"#c45611"})
+  });
+  $("#fooditem").mouseout(function () {
+    $(this).css({"background-color":"#c45611","color":"white"})
+  });
 </script>
 </html>
