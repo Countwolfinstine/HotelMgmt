@@ -120,6 +120,13 @@ app.get("/manager-api/onload1/", function(req,res){
     });
 });
 
+app.get("/feedback-api/:uid/:feedback",function(req,res){
+	con.query("INSERT INTO feedback(userid, feedback) VALUES ("+req.params.uid+",\""+req.params.feedback+"\")",function(err, result, fields){
+		if(err) throw err;
+	});
+	res.send(200);
+});
+
 app.get("/manager-api/onload2", function(req,res){
 	console.log("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC");
 	con.query("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC", function(err1,result1,fields1){
