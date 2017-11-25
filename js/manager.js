@@ -7,7 +7,8 @@ $(document).ready(function () {
 			var ingredientQuantity = $("#update_ingredient_quantity").val();
 
 			$.get("/manager-api/update-ingredient/"+ingredientName+"/"+ingredientQuantity, function(data,status){
-				alert("Data");
+				alert("updated");
+				location.reload();
 			});
 
 		});

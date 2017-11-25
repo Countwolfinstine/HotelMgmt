@@ -62,12 +62,6 @@ Vikas Mehta </p>
 Tom Prasad</p>
 		</div>
 
-		<!-- <h2 class="center caps"><b>Visualize The data From Every Angle</b></h2>
-		<center><img  class="abimg" src="images/abs3.png"/></center>
-		<div class="container abcont" >
-			<p>The platfrom creates a staistical metric using the processed data. The platform uses this metric to figure out the best possible way to visualize the processed data. The visualitaion is done and presented to the user on the dashboard.</p>
-		</div> -->
-
 
 	 </div>
 </div>
@@ -76,66 +70,17 @@ Tom Prasad</p>
 	<div class="container">
 
 		<h1 class="center heading" >Today's Menu</h1>
-		<!-- <div style="text-align: center">
-			<p >On the back-end, the Modratr platform comprises a suite of capabilities for integrating tabular data into coherent models, performing complex computations over models, and sharing and iterating on analytic products.</p>
-		</div> -->
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6" >
-					<h2><b>DATA STORAGE</b></h2>
-					<p>The platform uses multiple databases to store the uploded data. The data set is tracked and periodically saved and all changes are logged.
-					All the copies of the modified data is also saved </p>
-				</div>
-
-				<div class="col-md-6" >
-					<h2><b>VISUALIZATION ENGINE</b></h2>
-					<p>The platfrom has powerful and flexible visulization capabilities. It uses several different visualization techniques to represent the data according to the need of the user. </p>
-				</div>
-
-				<div class="col-md-6" >
-				 	<h2><b>MODERATION ENGINE</b></h2>
-					<p>Using the vast moderation faclities provided by the platform, the user can moderate the data according to the specifications. It tools which suggests the users on how to best moderate the data.</p>
-				</div>
-
-				<div class="col-md-6" >
-					<h2><b>HISTORY SENSITIVE</b></h2>
-					<p>The platform saves the changes made to the dataset in real time so that the user doesnt loose their changes in case of any faliures. The user can also go back to any version of the changed dataset.</p>
-				</div>
-				<div class="col-md-6" >
-					<h2><b>ANOMOLY DETECTION</b></h2>
-					<p>The Platform  has the ability to detect and correct any anomolies in the uploaded data. It also alerts the user about the anomolies and the corrective action it has taken to resolve the said anomolies</p>
-				</div>
-
-				<div class="col-md-6" >
-					<h2><b>DATA ARCHIVING</b></h2>
-					<p>Every data uploded to the platform is saved in the database and any moderation done by the user is refelected on a copy of the data. The original is not touched. </p>
-				</div>
-			</div>
+			<table id="menu_items" class="table table-responsive table-striped table-hover">
+				<tr>
+					<th>Name</th>
+					<th>Cost</th>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>
-	<!--
-<div class="jumbotron" id="Jumbo5">
-	<div class="container">
-		<h1 class="center heading" >INDIA</h1>
-		<br>
-		<h2 class="center"><b>DATA REPOSITORY</b></h2>
-		<div class="container abcont" >
-			<p>The Platform act as a Data repository. All the data uploaded is securely stored in several databases.Full access is provided only to a very limited amount of authorized users. Any changes or moderations done to the data is logged and saved in real time.The authorized users can access this saved form of data at any time.</p><p>
-		</div>
-
-		<h2 class="center"><b> Moderation tools</b></h2>
-		<div class="container abcont" >
-			<p>The platform provides several tools for moderation of marks data. For example the user can use the sliders to modify the ranges of each grade.It also has the capabilities to preprocess the data to detect and correct any anomalies. </p>
-		</div>
-
-		<h2 class="center"><b> Visualization tools</b></h2>
-		<div class="container abcont" >
-			<p>The data is visualized is several differnt ways. The user can use these visualization as a reference to moderate the data accordingly. Any moderation done is refected on the vizualization. Also the intial vizualization is maintained so that the user has some point of referance.
-		</p>
-		</div>
-	</div>
-</div> -->
+	
 <div class="footer" id="Jumbo3">
 		<div class="container center">
 			<h3>Developed By Team 7</h3>
@@ -153,76 +98,80 @@ Tom Prasad</p>
 
 
 	$(document).ready(function() {
-  	$("#ov").css("background-color", "#fff");
-	$("#ov").css("color", "#000");
+	  	$("#ov").css("background-color", "#fff");
+		$("#ov").css("color", "#000");
+		$.getJSON("/get-menu/0",printTerms);
 
-
-});
-
-	$(document).ready(function() {
-  	$("#Jumbo4").hide();
-  	$("#Jumbo5").hide();
-  	$("#Jumbo2").show();
-
-});
+	});
 	$("#ov").click(function() {
 
-	$("#ov").css("background-color", "#fff");
-	$("#ov").css("color", "#000");
+		$("#ov").css("background-color", "#fff");
+		$("#ov").css("color", "#000");
 
 
-	$("#ap").css("background-color", "transparent");
-	$("#ap").css("color", "#fff");
+		$("#ap").css("background-color", "transparent");
+		$("#ap").css("color", "#fff");
 
-	$("#st").css("background-color", "transparent");
-	$("#st").css("color", "#fff");
+		$("#st").css("background-color", "transparent");
+		$("#st").css("color", "#fff");
 
 
-  	$("#Jumbo4").hide();
-  	$("#Jumbo5").hide();
-  	$("#Jumbo2").show();
+	  	$("#Jumbo4").hide();
+	  	$("#Jumbo5").hide();
+	  	$("#Jumbo2").show();
 
-});
+	});
+	
 	$("#st").click(function() {
 
-	$("#ov").css("background-color", "transparent");
-	$("#ov").css("color", "#fff");
+		$("#ov").css("background-color", "transparent");
+		$("#ov").css("color", "#fff");
 
-	$("#ap").css("background-color", "transparent");
-	$("#ap").css("color", "#fff");
+		$("#ap").css("background-color", "transparent");
+		$("#ap").css("color", "#fff");
 
-	$("#st").css("background-color", "#fff");
-	$("#st").css("color", "#000");
+		$("#st").css("background-color", "#fff");
+		$("#st").css("color", "#000");
 
-  	$("#Jumbo2").hide();
-  	$("#Jumbo5").hide();
-  	$("#Jumbo4").show();
+	  	$("#Jumbo2").hide();
+	  	$("#Jumbo5").hide();
+	  	$("#Jumbo4").show();
 
-});
+	});
+	
 	$("#ap").click(function() {
 
-  	$("#ov").css("background-color", "transparent");
-	$("#ov").css("color", "#fff");
+	  	$("#ov").css("background-color", "transparent");
+		$("#ov").css("color", "#fff");
 
-  	$("#st").css("background-color", "transparent");
-	$("#st").css("color", "#fff");
+	  	$("#st").css("background-color", "transparent");
+		$("#st").css("color", "#fff");
 
-	$("#ap").css("background-color", "#fff");
-	$("#ap").css("color", "#000");
+		$("#ap").css("background-color", "#fff");
+		$("#ap").css("color", "#000");
 
-  	$("#Jumbo4").hide();
-  	$("#Jumbo2").hide();
-  	$("#Jumbo5").show();
+	  	$("#Jumbo4").hide();
+	  	$("#Jumbo2").hide();
+	  	$("#Jumbo5").show();
 
-});
+	});
 
-$("#logout").click(function(){
-  console.log("logging out");
-  $.get("/logout-api");
-  window.open("login.html","_self")
+	$("#logout").click(function(){
+	  console.log("logging out");
+	  $.get("/logout-api");
+	  window.open("login.html","_self")
 
 
-});
+	});
+
+	function printTerms(term){
+		$.each(term, function(index,term){
+			$("#menu_items").append("<tr id = food"+term['item_id']+">"+
+				"<td><b>"+term['item_name']+"<b></td>"+
+				"<td><b>"+term['price']+"<b></td>"+
+				"</tr>");
+		})
+	}
 
 
 </script>

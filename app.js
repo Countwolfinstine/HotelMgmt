@@ -128,8 +128,8 @@ app.get("/feedback-api/:uid/:feedback",function(req,res){
 });
 
 app.get("/manager-api/onload2", function(req,res){
-	console.log("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC");
-	con.query("SELECT * FROM `ingredients` WHERE quantity<40 ORDER BY quantity DESC", function(err1,result1,fields1){
+	console.log("SELECT * FROM `ingredients` WHERE quantity<30 ORDER BY quantity DESC");
+	con.query("SELECT * FROM `ingredients` WHERE quantity<30 ORDER BY quantity DESC", function(err1,result1,fields1){
 		console.log(result1);
 		if (err1) throw err1;
 		res.send(result1);
